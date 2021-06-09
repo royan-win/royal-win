@@ -1,0 +1,42 @@
+.userdetails{
+    display: flex;
+    flex-direction: column;
+}
+.userdetails input{
+    width:300px;
+    height: 36px;
+    margin:10px; 
+    text-align: center;
+    border:1px solid black; 
+}   
+.login {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.login_footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:300px;
+}
+.button button {
+    margin: auto;
+    margin:10px;
+    width:30%;
+    height:30px;
+    background-color: rgb(245, 245, 245); 
+    border: none;
+    box-shadow: 1px 1px 1px black;
+}
+::placeholder{
+    text-align: center;
+}
+.fa{
+    position: relative;
+    top:-40px;
+    left:20px;
+}
