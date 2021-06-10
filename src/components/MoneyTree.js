@@ -11,13 +11,13 @@ var [value, setvalue] = useState([])
   const [time , setime] = useState(num) ;
   const [rollSum , setrollsum] = useState(13); 
   const [nextrollsum , setnextrollsum] = useState(""); 
-  const [dice1 , setdice1] = useState(5); 
-  const [dice2 , setdice2] = useState(1);
-  const [dice3 , setdice3] = useState(7); 
+  var [dice1 , setdice1] = useState(5); 
+  var [dice2 , setdice2] = useState(1);
+  var [dice3 , setdice3] = useState(7); 
  const [data , setdata] = useState({
    3:"" ,
    4:"" ,
-   5:"" , 
+   5:"" ,
    6:"" ,
    7:"" ,
    8:"" ,
@@ -87,10 +87,16 @@ useEffect(() => {
 setvalue(val) ; 
 
 }, [numberofdraw])
+var arr1 = [1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] ; 
+var arr2=[]; 
 const numberClicked = (e)=>{
    e.preventDefault();
-  const numbervalue = e.target.value ; 
   console.log(e.target.value);
+  console.log(arr1); 
+  arr2= arr1.filter((arr1) => e.target.value !=arr1 );
+
+  
+   
   if(e.target.value==rollSum){
     alert("write answer"); 
   }
