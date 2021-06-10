@@ -9,4 +9,5 @@ API.interceptors.request.use((req) => {
 export const signin  = (formdata) =>API.post(`/users/signin` , formdata) ;
 export const signup   = (formdata) => API.post(`/users/signup` , formdata) ;
 export const reset   = (formdata) => API.post(`/users/reset` , formdata) ;
+export const history  = (data) => API.post(`/history` , data) ;
 export const newpassword = (id,formdata) => API.patch(`/users/newpassword/${id}` , formdata);

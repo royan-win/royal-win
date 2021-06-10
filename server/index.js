@@ -16,7 +16,7 @@ app.get("/", (req,res)=>{
     res.send("app is running"); 
 })
 app.use("/users" , require("./routes/users")) ; 
-app.use("/users" , require("./routes/Moneytree")) ; 
+app.use("/history" , require("./routes/Moneytree")) ; 
 app.listen(port , ()=>{
     console.log(`listening at port number ${port}`) ; 
 })
