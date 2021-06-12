@@ -59,3 +59,34 @@ export const newpassword = (id , post , history) =>async(dispatch)=>{
         dispatch({type:"ERROR" , payload : error_message}) ;
     }
 }
+export const admin = (formdata , history) =>async(dispatch)=>{
+    try{
+        console.log(formdata) ; 
+        const {data} = await api.admin(formdata); 
+        console.log(data);  
+        const datadetails = {
+            result:data?.result , 
+            token:data?.token,
+        }
+        console.log(data?.userdetails)
+        dispatch({type:"AUTH" , data:datadetails}) ;
+        dispatch({type:"USERDETAILS" , data:data?.userdetails}) 
+      history.push("/Home")  ;
+    }catch(err){
+        console.log(err); 
+        const error_message=(err.response.data.message); 
+        console.log(error_message) ; 
+        dispatch({type:"ERROR" , payload : error_message}) ;
+    }
+}
+export const totalcoinsdata = (formdata)=>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+const {data} = await api.totalcoins(formdata)
+console.log(data); 
+dispatch({type:"AUTH" , data}); 
+
+    }catch(err){
+        console.log(err) ;
+    }
+}

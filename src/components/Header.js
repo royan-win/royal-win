@@ -10,6 +10,8 @@ function Header() {
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
+    const user = JSON.parse(localStorage.getItem("profile"));
+    var userid = user?.result?._id; 
     return (
         <header>
             <div className="flex justify-between items-center bg-gray-800 p-1 flex-grow py-2">
@@ -34,7 +36,8 @@ function Header() {
                                         <div>
                                             <div>
                                                 <p>Total fund</p>
-                                                <p className="font-normal">COIN. <span className="font-medium text-yellow-400">0</span></p>
+                                                {userid && <p className="font-normal">COIN. <span className="font-medium text-yellow-400">{user?.result?.coins}</span></p>}
+                                                
                                             </div>
                                         </div>
                                     </div>

@@ -1,7 +1,9 @@
 const bcrypt = require("bcryptjs") ; 
 const jwt = require("jsonwebtoken") ; 
 const UserModal = require("../models/users") ; 
+const AdminModal = require("../models/admin"); 
 var nodemailer = require('nodemailer');
+const { db } = require("../models/users");
 var transporter = nodemailer.createTransport(({
   service:"sendinblue",
   auth:{
@@ -102,8 +104,40 @@ catch(err){
    res.status(400).json({ message: "password does not match" });
   console.log(err); 
 }
-
-
 }
 
-module.exports ={signin , signup , reset ,newpassword} ; 
+const admin = async(req,res)=>{
+const {username,password} = req.body ; 
+try{
+ const oldUser = await AdminModal.findOne( { $and: [ { username:username }, { password:password} ] } )
+console.log(oldUser) ;  
+if(oldUser){
+var userdetails = await UserModal.find(); 
+}
+const token = jwt.sign({ username: oldUser.username, id: oldUser._id }, "test",);
+console.log(token) ; 
+res.status(200).json({ result: oldUser, token , userdetails });
+}catch(err){
+  res.status(400).json({ message: "invalid credentials" });
+  console.log(err); 
+}
+}
+
+const totalcoins = async(req,res)=>{
+  console.log(req.body); 
+  const {totalcoins, userid} = req.body ; 
+  let olduser ; 
+  try{
+    olduser = await UserModal.findById(userid);
+    console.log(olduser) ; 
+    (olduser.coins = totalcoins)
+    await olduser.save(); 
+    console.log(olduser) ; 
+    res.status(201).json({result:olduser});
+
+  }catch(err){
+    res.status(201).json({ message: "something went wrong" });
+    console.log(err);
+    }
+}
+module.exports ={signin , signup , reset ,newpassword , admin , totalcoins} ; 

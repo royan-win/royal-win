@@ -5,6 +5,9 @@ const userSchema = mongoose.Schema({
   phone_number:{type:Number , required:true},
   bank_acc: {type:Number , required:true},
   ifsc:{type:String , required:true},
+  coins:
+  {type:Number,
+  default:0},
   password: { type: String, required: true },
   id: { type: String }, 
 });

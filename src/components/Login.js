@@ -162,6 +162,7 @@ const Login = () => {
         
           <Link to="/reset">forgot password?</Link>
           <Link to="/">to register</Link>
+          <Link to="/Admin">Admin</Link>
         </div>
       </div>
     </>

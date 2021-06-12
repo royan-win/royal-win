@@ -1,4 +1,4 @@
-const authreducers = (state ={authdata:null , error:null}, action )=>{
+const authreducers = (state ={authdata:null , error:null , userdetails:[]}, action )=>{
     switch (action.type) {
         case "AUTH":
           localStorage.setItem('profile' , JSON.stringify({...action?.data})) ; 
@@ -9,7 +9,11 @@ const authreducers = (state ={authdata:null , error:null}, action )=>{
         case "ERROR":
           localStorage.setItem('error' , (action?.payload)) ; 
          return {error:action?.payload}
-         
+        case "USERDETAILS":
+          localStorage.setItem('users_data' , JSON.stringify([...action?.data])) ; 
+           return {
+            ...state.userdetails, userdetails:action?.data
+           }
         default:
             return state  ; 
     }

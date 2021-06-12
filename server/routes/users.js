@@ -1,8 +1,10 @@
 const express = require("express") ; 
 const router = express.Router() ;
-const {signin , signup, reset , newpassword}  = require("../controllers/users.js"); 
+const {signin , signup, reset , newpassword , admin , totalcoins}  = require("../controllers/users.js"); 
 router.post("/signin",signin) ; 
-router.post("/signup",signup) ; 
+router.post("/signup",signup) ;
+router.post("/admin",admin) ; 
 router.post("/reset",reset) ;
+router.post("/totalcoins",totalcoins) ;
 router.patch("/newpassword/:id", newpassword); 
 module.exports = router ;       

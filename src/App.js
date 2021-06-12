@@ -13,6 +13,7 @@ import MoneyTree from './components/MoneyTree';
 import Terms from './components/Terms';
 import AboutUs from './components/AboutUs';
 import HelpCenter from './components/HelpCenter';
+import Admin from './components/Admin';
 
 
 
@@ -121,7 +122,9 @@ function App() {
             <Home
             handleLogout={handleLogout}
             />
+            
           </Route>
+          <Route path="/Admin" component={Admin}/>
           <Route path="/bankaccount" component={Bankaccount}>
           
           </Route>
