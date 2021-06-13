@@ -10,7 +10,7 @@ const MoneyTree = () => {
   var [value, setvalue] = useState([])
   var [coins, setcoins] = useState(""); 
   var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
-  var num = 5;
+  var num = 30;
   const [time, setime] = useState(num);
   const [rollSum, setrollsum] = useState(13);
   const [nextrollsum, setnextrollsum] = useState("");
@@ -58,7 +58,7 @@ const MoneyTree = () => {
       num = num - 1;
       setime(num)
       if (num < 1) {
-        num = 5;
+        num = 31;
         numberofdraw = numberofdraw + 1
         setnumberofdraw(numberofdraw)
         clearInterval(timeref)

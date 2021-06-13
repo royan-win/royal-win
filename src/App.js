@@ -14,10 +14,9 @@ import Terms from './components/Terms';
 import AboutUs from './components/AboutUs';
 import HelpCenter from './components/HelpCenter';
 import Admin from './components/Admin';
-
-
-
-
+import UserDetails from './components/Userdetails';
+import AdminPage from "./components/AdminPage" ; 
+import Withdrawal from "./components/Withdrawal";
 function App() {
 
     const [name, setName] = useState('');
@@ -31,7 +30,8 @@ function App() {
     const [samePass, setSamepass] = useState(false);
     const [phonenoError, setPhonenoError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-
+    const admindata = JSON.parse(localStorage.getItem("profile"));
+    console.log(admindata?.result?._id); 
 
 
     const clearInputs = () => {
@@ -99,7 +99,9 @@ function App() {
     <div className="items-center overflow-x-hidden">
       <Router>
         <Header/>
+       
         <Switch>
+        <Route path="/Userdetails" component={UserDetails}/> 
           <Route path="/deposit">
             <Deposit/>
           </Route>
@@ -118,13 +120,18 @@ function App() {
           <Route path="/moneytree">
             <MoneyTree/>
           </Route>
+          {admindata?.result?._id !=="60c4a58ba4472a617063ad63" && 
           <Route path="/home" component={Home}>
             <Home
             handleLogout={handleLogout}
             />
             
           </Route>
+      }
+          {/* <Route Path="/AdminPage" component={AdminPage}/> */}
           <Route path="/Admin" component={Admin}/>
+          <Route path="/AdminPage" component={AdminPage}/>
+          <Route path="/withdrawal" component={Withdrawal}/>
           <Route path="/bankaccount" component={Bankaccount}>
           
           </Route>
