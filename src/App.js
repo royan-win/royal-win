@@ -14,9 +14,11 @@ import Terms from './components/Terms';
 import AboutUs from './components/AboutUs';
 import HelpCenter from './components/HelpCenter';
 import Admin from './components/Admin';
+import ColorWin from './components/ColorWin';
 import UserDetails from './components/Userdetails';
 import AdminPage from "./components/AdminPage" ; 
 import Withdrawal from "./components/Withdrawal";
+import LadderGame from './components/LadderGame';
 function App() {
 
     const [name, setName] = useState('');
@@ -105,6 +107,10 @@ function App() {
           <Route path="/deposit">
             <Deposit/>
           </Route>
+          <Route path="/ColorWin" component={ColorWin}>
+        
+          </Route>
+          <Route path="/laddergame" component={LadderGame}></Route>
           <Route path="/terms">
             <Terms/>
           </Route>
