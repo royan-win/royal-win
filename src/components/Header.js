@@ -2,16 +2,27 @@ import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai"
+import { useDispatch } from "react-redux";
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons/lib';
-
+import { useHistory } from "react-router-dom";
 function Header() {
+    
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const logout = () => {
+        dispatch({ type: "LOGOUT" });
+        history.push("/");
+      };
     const user = JSON.parse(localStorage.getItem("profile"));
     var userid = user?.result?._id; 
+   
+
+    var coins = Math.floor(user?.result?.coins);
     return (
         <header>
             <div className="flex justify-between items-center bg-gray-800 p-1 flex-grow py-2">
@@ -32,11 +43,13 @@ function Header() {
                                         <h1 className="pl-7 pt-7 text-6xl">👑</h1>
                                     </div>
                                     <div className="grid p-4 grid-flow-row">
-                                        <div className="text-base pb-12">Welcome</div>
+                                    {userid&&
+                                        <div className="text-base pb-12">Welcome {user?.result?.Real_name}</div>
+                                    }
                                         <div>
                                             <div>
                                                 <p>Total fund</p>
-                                                {userid && <p className="font-normal">COIN. <span className="font-medium text-yellow-400">{user?.result?.coins}</span></p>}
+                                                {userid && <p className="font-normal">COIN. <span className="font-medium text-yellow-400">{coins}</span></p>}
                                                 
                                             </div>
                                         </div>
@@ -61,8 +74,14 @@ function Header() {
                     <img className="h-20 text-white font-semibold sm:text-md md:text-lg text" src="wagerking.png" alt=""/>
                 </div>
                 <div className="text-black flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
-                    <button className="bg-yellow-400 hover:bg-yellow-300 py-1 px-3 border-gray-100 rounded">Login</button>
-                    <button className="bg-red-500 hover:bg-red-400 py-1 px-3 border-gray-100 rounded">Register</button>
+                {!userid ? 
+                <>
+                <Link to="/login"><button className="bg-yellow-400 hover:bg-yellow-300 py-1 px-3 border-gray-100 rounded">Login</button></Link>
+                <Link to="/"> <button className="bg-red-500 hover:bg-red-400 py-1 px-3 border-gray-100 rounded">Register</button></Link>
+                </>
+                :
+                <button  onClick={logout} className="bg-yellow-400 hover:bg-yellow-300 py-1 px-3 border-gray-100 rounded">Logout</button>
+                }
                 </div>
             </div>
         </header>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-
+import { laddergame } from '../redux/actions/auth';
+import {totalcoinsdata} from "../redux/actions/auth"
 import AD from "./images/AD.png";
 import AC from "./images/AC.png";
 import BC from "./images/BC.png";
@@ -9,10 +10,14 @@ import BD from "./images/BD.png";
 
 function LadderGame() {
     const dispatch = useDispatch(); 
+    // var [numberclick, setnumberclick] = useState(0);
     var[totalcoins ,setotalcoins] = useState(0) ; 
     var [coins, setcoins] = useState(""); 
-    var [numberclick, setnumberclick] = useState(null);
+    const user = JSON.parse(localStorage.getItem("profile"));
+    var userid = user?.result?._id; 
+    var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
   var dicehistory = useSelector(state => state.History) ; 
+   const numberclick = useSelector(state => state?.auth?.laddergame)
 var [value, setvalue] = useState([]) 
 
     var num =10 ;
@@ -91,15 +96,16 @@ useEffect(()=>{
 
 
 
-
 const numberClicked = (e)=>{
-  e.preventDefault(); 
-   setnumberclick(e.target.value); 
-   console.log(numberclick);
+    console.log(e.currentTarget.value);
+   dispatch(laddergame(e.currentTarget.value)); 
 }
+
+ 
 const coinbuyed = (e) => {
   e.preventDefault();
   console.log("hello");
+
   console.log(numberclick);
   if (numberclick == `${arrfirst}${arrsecond}` ) {  
     var coinsnumberofcoin = coins * 1.9;
@@ -107,8 +113,9 @@ const coinbuyed = (e) => {
     totalcoins=coinsnumberofcoin+totalcoins
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
+    dispatch(totalcoinsdata({totalcoins,userid})) ; 
     console.log(coinsnumberofcoin);
-    alert(coinsnumberofcoin);
+    alert(`congrats , you win more ${coinsnumberofcoin} coins`);
   }
 }
     return (
@@ -202,7 +209,7 @@ const coinbuyed = (e) => {
             <div className="grid grid-flow-col mb-2">
               <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 border w-8 items-center ml-6">
-                  <button value="AC" name="AC"  onClick={numberClicked} className="text-yellow-600 text-md">AC</button>
+                  <button value={"AC"} name="AC"  onClick={numberClicked} className="text-yellow-600 text-md">AC</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">3.6</p>
               </div>

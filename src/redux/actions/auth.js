@@ -81,7 +81,7 @@ export const admin = (formdata , history) =>async(dispatch)=>{
     }
 }
 export const totalcoinsdata = (formdata)=>async(dispatch)=>{
-    console.log(formdata) ; 
+    console.log(formdata) ;     
     try{
 const {data} = await api.totalcoins(formdata)
 console.log(data); 
@@ -89,5 +89,13 @@ dispatch({type:"AUTH" , data});
 
     }catch(err){
         console.log(err) ;
+    }
+}
+export const laddergame = (data) =>async(dispatch)=>{
+    
+    try{
+        dispatch({type:"LADDERGAME" , data})
+    }catch(err){
+        console.log(err); 
     }
 }

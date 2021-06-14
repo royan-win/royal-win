@@ -1,4 +1,4 @@
-const authreducers = (state ={authdata:null , error:null , userdetails:[]}, action )=>{
+const authreducers = (state ={authdata:null , error:null , userdetails:[] , laddergame:null}, action )=>{
     switch (action.type) {
         case "AUTH":
           localStorage.setItem('profile' , JSON.stringify({...action?.data})) ; 
@@ -14,6 +14,11 @@ const authreducers = (state ={authdata:null , error:null , userdetails:[]}, acti
            return {
             ...state.userdetails, userdetails:action?.data
            }
+         case "LADDERGAME":
+           return{
+             laddergame:action.data
+           }  
+           
         default:
             return state  ; 
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/actions/auth';
-import { totalcoinsdata } from '../redux/reducers/auth';
+import {totalcoinsdata} from "../redux/actions/auth"
 import {useHistory} from "react-router-dom"; 
 function ColorWin() {
     const history = useHistory();   
@@ -14,10 +14,10 @@ function ColorWin() {
   var dicehistory = useSelector(state => state.History) ; 
 var [value, setvalue] = useState([]) 
 
-    var num =30 ;
+    var num =10 ;
   const [time , setime] = useState(num) ;
-  const [rollSum , setrollsum] = useState(13); 
-  const [nextrollsum , setnextrollsum] = useState(""); 
+
+
   const [open, setOpen] = useState(false);
   const [color2, setColor2] = useState('');
   var [dice1 , setdice1] = useState(5);  
@@ -27,6 +27,9 @@ var [value, setvalue] = useState([])
   );
 
  const [data , setdata] = useState({
+    0:"" ,
+    1:"" ,
+    2:"" ,  
    3:"" ,
    4:"" ,
    5:"" ,
@@ -43,16 +46,14 @@ var [value, setvalue] = useState([])
     const dice1=Math.floor(Math.random() * 2) + 1 ; 
     setdice1(dice1) ; 
   }
-  var historydata = {
-    dice1 
-  }
+
   
   function myFunction() {
     timeref = setInterval(function(){ 
         num = num-1; 
         setime(num) 
         if(num<1){
-             num=30;
+             num=10;
             numberofdraw = numberofdraw+1
             setnumberofdraw(numberofdraw)
             clearInterval(timeref)
@@ -89,37 +90,26 @@ const numberClicked = (e)=>{
    e.preventDefault();
    setnumberclick(e.target.value);
    console.log(numberclick);
-   setnextrollsum(e.target.value);
+  
    arr2 = arr1.filter((arr1) => e.target.value != arr1);
-   console.log(dice1);
+//    console.log(dice1);
   
 }
-/*
-const handleClick = () => {
-    setOpen(!open);
-}
-useEffect(() => {
-  if(nextrollsum!=undefined){
-    arr2= arr1.filter((arr1) =>nextrollsum !=arr1 );
-    setrollsum(arr2[Math.floor(Math.random() * 18) + 1]); 
-    console.log(dice1); 
-  }
-}, [numberofdraw]); */
+
 const coinbuyed = (e) => {
   e.preventDefault();
   console.log("hello");
-  console.log(rollSum)
+  console.log(dice1)
   console.log(coins);
   console.log(numberclick);
-  if (numberclick == rollSum) {  
-    var coinsnumberofcoin = coins * 1.9;
+  if (numberclick == dice1) {  
+    var coinsnumberofcoin = coins * 9.1;
     console.log(totalcoins); 
     totalcoins=coinsnumberofcoin+totalcoins
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
-    //dispatch(totalcoinsdata({totalcoins,userid})) ; 
-    // setcoins(coinsnumberofcoin);
     console.log(coinsnumberofcoin);
+    dispatch(totalcoinsdata({totalcoins,userid})) ; 
     alert(coinsnumberofcoin);
   }
 }
@@ -170,7 +160,7 @@ return (
           )} 
 <div className="flex p-3 justify-between">
     <div className="pt-10 pl-5">
-        <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{rollSum}</div>
+        <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{dice1}</div>
         <div className="flex items center">
             <h1 className="mt-2">Color:</h1> 
             <div className="flex">
@@ -225,25 +215,25 @@ return (
           <div className="grid grid-flow-col mb-2">
             <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={3} name="3"  onClick={numberClicked} className="text-yellow-600 text-md">0</button>
+                <button value={0} name="0"  onClick={numberClicked} className="text-yellow-600 text-md">0</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={4} name="4"  onClick={numberClicked} className="text-yellow-600 text-md">1</button>
+                <button value={1} name="1"  onClick={numberClicked} className="text-yellow-600 text-md">1</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={5} name="5"  onClick={numberClicked} className="text-yellow-600 text-md">2</button>
+                <button value={2} name="2"  onClick={numberClicked} className="text-yellow-600 text-md">2</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={6} name="6"  onClick={numberClicked} className="text-yellow-600 text-md">3</button>
+                <button value={3} name="3"  onClick={numberClicked} className="text-yellow-600 text-md">3</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
@@ -251,25 +241,25 @@ return (
           <div className="grid grid-flow-col mb-2">
             <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={7} name="7"  onClick={numberClicked} className="text-yellow-600 text-md">4</button>
+                <button value={4} name="4"  onClick={numberClicked} className="text-yellow-600 text-md">4</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={8} name="8"  onClick={numberClicked} className="text-yellow-600 text-md">5</button>
+                <button value={5} name="5"  onClick={numberClicked} className="text-yellow-600 text-md">5</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={9} name="9"  onClick={numberClicked} className="text-yellow-600 text-md">6</button>
+                <button value={6} name="6"  onClick={numberClicked} className="text-yellow-600 text-md">6</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">1.9</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                <button value={10} name="10"  onClick={numberClicked} className="text-yellow-600 text-md">7</button>
+                <button value={7} name="7"  onClick={numberClicked} className="text-yellow-600 text-md">7</button>
               </div>
               <p className="text-white ml-7 mt-1 text-sm">9.1</p>
             </div>
@@ -277,13 +267,13 @@ return (
           <div className="grid grid-flow-col mb-2">
             <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-16">
-                <button value={11} name="11"  onClick={numberClicked} className="text-yellow-600 text-md">8</button>
+                <button value={8} name="8"  onClick={numberClicked} className="text-yellow-600 text-md">8</button>
               </div>
               <p className="text-white ml-16 pl-2 pt-1 mt-1 text-sm">9.1</p>
             </div>
             <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
               <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-16">
-                <button value={12} name="12"  onClick={numberClicked} className="text-yellow-600 text-md">9</button>
+                <button value={9} name="9"  onClick={numberClicked} className="text-yellow-600 text-md">9</button>
               </div>
               <p className="text-white ml-16 pl-2 pt-1 mt-1 text-sm">9.1</p>
             </div>
@@ -294,9 +284,13 @@ return (
     <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
       <div className="flex">
         <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>
-        <input className="h-12 items-center pl-8 outline-none bg-gray-600 text-white w-24 m-3 rounded-2xl" type="text" />
+        <input className="h-12 items-center pl-8 outline-none bg-gray-600 text-white w-24 m-3 rounded-2xl" type="text" 
+          onChange={(e) => setcoins(e.target.value)}   
+        />
         <h1 className="pt-6 pl-1 font-semibold text-xl text-yellow-500">/Buy</h1>
-        <button className="mt-4 mb-3 rounded-lg ml-16 p-2 pl-6 pr-6 bg-gray-600 font-semibold text-xl text-yellow-500">BUY</button>
+        <button className="mt-4 mb-3 rounded-lg ml-16 p-2 pl-6 pr-6 bg-gray-600 font-semibold text-xl text-yellow-500"
+        onClick={coinbuyed}
+        >BUY</button>
       </div>
     </div>
 </div>
