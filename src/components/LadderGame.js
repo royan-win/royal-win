@@ -6,7 +6,7 @@ import AD from "./images/AD.png";
 import AC from "./images/AC.png";
 import BC from "./images/BC.png";
 import BD from "./images/BD.png";
-
+import {deposit} from "../redux/actions/auth" ; 
 
 function LadderGame() {
     const dispatch = useDispatch(); 
@@ -115,6 +115,7 @@ const coinbuyed = (e) => {
     setotalcoins(totalcoins); 
     dispatch(totalcoinsdata({totalcoins,userid})) ; 
     console.log(coinsnumberofcoin);
+    dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
     alert(`congrats , you win more ${coinsnumberofcoin} coins`);
   }
 }

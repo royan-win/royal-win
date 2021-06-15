@@ -19,6 +19,8 @@ import UserDetails from './components/Userdetails';
 import AdminPage from "./components/AdminPage" ; 
 import Withdrawal from "./components/Withdrawal";
 import LadderGame from './components/LadderGame';
+import Coinswithdrwal from './components/Coinswithdrwal';
+import Message from './components/Message';
 function App() {
 
     const [name, setName] = useState('');
@@ -123,8 +125,14 @@ function App() {
           <Route path="/help">
             <HelpCenter/>
           </Route>
+          <Route path="/coinswithdrwal">
+            <Coinswithdrwal></Coinswithdrwal>
+          </Route>
           <Route path="/moneytree">
             <MoneyTree/>
+          </Route>
+          <Route path="/message">
+            <Message></Message>
           </Route>
           {admindata?.result?._id !=="60c4a58ba4472a617063ad63" && 
           <Route path="/home" component={Home}>

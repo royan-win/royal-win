@@ -13,3 +13,5 @@ export const history  = (data) => API.post(`/history` , data) ;
 export const newpassword = (id,formdata) => API.patch(`/users/newpassword/${id}` , formdata);
 export const admin  = (data) =>API.post(`/users/admin` , data) ;
 export const totalcoins = (data) =>API.post("/users/totalcoins" , data);
+export const deposit = (formdata) => API.post(`/users/deposit` , formdata);
+export const adminwithdrwal = (formdata) => API.post(`/users/adminwithdrwal` , formdata);

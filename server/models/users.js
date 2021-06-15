@@ -10,6 +10,12 @@ const userSchema = mongoose.Schema({
   default:0},
   password: { type: String, required: true },
   id: { type: String }, 
+  deposit :{
+    coins_deposit:{type:String},
+    name:{type:String} , 
+    deposited_on:{type:Date},
+    default:{}, 
+},
 });
 
 const users= mongoose.model("User", userSchema);

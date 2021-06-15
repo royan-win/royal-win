@@ -9,7 +9,7 @@ function ColorWin() {
     const user = JSON.parse(localStorage.getItem("profile"));
     var userid = user?.result?._id; 
     var [coins, setcoins] = useState(""); 
-  var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
+    var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
   var [drawhis , setdrwahis] = useState([]) ; 
   var dicehistory = useSelector(state => state.History) ; 
 var [value, setvalue] = useState([]) 

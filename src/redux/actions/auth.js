@@ -30,6 +30,17 @@ export const signup = (formdata , history) =>async(dispatch)=>{
         dispatch({type:"ERROR" , payload : error_message}) ;
     }
 }
+export const deposit = (formdata) =>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+        const {data} = await api.deposit(formdata); 
+        dispatch({type:"AUTH" , data}) ;
+        console.log(data); 
+    }
+    catch(err){
+        console.log(err); 
+    }
+}
 export const reset = (formdata) =>async(dispatch)=>{
  
     try{
@@ -95,6 +106,17 @@ export const laddergame = (data) =>async(dispatch)=>{
     
     try{
         dispatch({type:"LADDERGAME" , data})
+    }catch(err){
+        console.log(err); 
+    }
+}
+export const adminwithdrwal = (formdata) =>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+        alert("coins request send "); 
+        const {data} = await api.adminwithdrwal(formdata);
+        
+        console.log(data); 
     }catch(err){
         console.log(err); 
     }

@@ -129,10 +129,10 @@ const totalcoins = async(req,res)=>{
   let olduser ; 
   try{
     olduser = await UserModal.findById(userid);
-    console.log(olduser) ; 
+    
     (olduser.coins = totalcoins)
     await olduser.save(); 
-    console.log(olduser) ; 
+  
     res.status(201).json({result:olduser});
 
   }catch(err){
@@ -140,4 +140,47 @@ const totalcoins = async(req,res)=>{
     console.log(err);
     }
 }
-module.exports ={signin , signup , reset ,newpassword , admin , totalcoins} ; 
+const deposit = async (req, res) => {
+const {id} = req.body; 
+console.log(req.body); 
+  try {
+    const depositdata = {
+      coins_deposit: req.body.deposit,
+      name: req.body.name,
+      deposited_on:new Date().toISOString()
+    };
+      const depositedcoins = await UserModal.findByIdAndUpdate(
+      id,
+      { $push: { deposit:depositdata} },
+      { new: true }
+    );
+
+    console.log(depositedcoins); 
+    res.status(201).json({result:depositedcoins});
+   }
+  catch(err){
+    console.log(err); 
+     res.status(201).json({ message: "something went wrong" });
+  }
+};
+const  adminwithdrwal = async(req,res)=>{
+  console.log(req.body) ; 
+  const id = "60c4a58ba4472a617063ad63"
+try{
+  const withdrawtdata = {
+    coins_withdrwal:req.body.withdrwal,
+    withdrwal:req.body.name,
+    withdrwal_on:new Date().toISOString()
+  };
+    const withdrawcoins = await AdminModal.findByIdAndUpdate(
+      id,
+    { $push: { withdrwal:withdrawtdata} },
+    { new: true }
+  );
+  console.log(withdrawcoins); 
+}
+catch(err){
+  console.log(err)  ;
+}
+}
+module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal} ; 
