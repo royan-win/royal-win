@@ -23,7 +23,7 @@ const Coinswithdrwal = () => {
     const handlesubmit = (e)=>{
         e.preventDefault();
         const balance = totalcoins-changecoins; 
-         dispatch(adminwithdrwal({withdrwal:changecoins , id:userid , name:user?.result?.Real_name  }));
+        dispatch(adminwithdrwal({withdrwal:changecoins , id:userid , name:user?.result?.Real_name  }));
     }
     return (
         <div className="bg-back-img">

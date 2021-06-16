@@ -121,3 +121,14 @@ export const adminwithdrwal = (formdata) =>async(dispatch)=>{
         console.log(err); 
     }
 }
+export const userdetails = (id)=>async(dispatch)=>{
+    console.log(id) ; 
+    try{
+        const {data} = await api.userdetails(id);
+        console.log(data); 
+        dispatch({type:"AUTH" , data}) ; 
+       
+    }catch(err){
+        console.log(err); 
+    }
+}

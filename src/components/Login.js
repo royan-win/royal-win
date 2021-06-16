@@ -70,8 +70,7 @@
 // export default Login
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-  import { signin  } from "../redux/actions/auth";
-import "./Login.css";
+import { signin } from "../redux/actions/auth";
 import { Link ,useHistory} from "react-router-dom";
 import Recaptcha from "react-recaptcha";
 const Login = () => {
@@ -119,51 +118,53 @@ const Login = () => {
 //   };
   return (
     <>
-      <div className="login">
-        <h1>Login</h1>
-        {error !== null ? (
-          <h4 style={{ color: "red", fontWeight: "500" }}> {error}</h4>
-        ) : (
-          " "
-        )}
-        <div className="userdetails">
-          <input
-            type="text"
-            name="phone_number"
-            onChange={handleChange}
-            placeholder="phone number"
-          ></input>
-          <i className="fa fa-user"></i>
-          <input
-            type="text"
-            name="password"
-            onChange={handleChange}
-            placeholder="password"
-          ></input>
-          <i className="fa fa-lock"></i>
-          <Recaptcha
-            sitekey="6LfE5h0bAAAAAO6yB7O3gshydGZFza32k9Wm5PHA"
-            render="explicit"
-            onloadCallback={recaptchaLoaded}
-            // verifyCallback={verifyCallback}
-          />
-          <div className="button">
-            <button onClick={handleSubmit} type="submit">
-              Login
-            </button>
+      <div className="w-full bg-back-img h-screen flex flex-col justify-items-center justify-center items-center">
+        <div className="bg-yellow-400 p-8 rounded-2xl w-72 -mt-36">
+          <h1 className="items-center justify-center flex text-gray-800 font-semibold text-xl">Login</h1>
+          {error !== null ? (
+            <h4 className="text-red-600 font-semibold"> {error}</h4>
+          ) : (
+            " "
+          )}
+            <input
+            className="pl-5 mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+              type="text"
+              name="phone_number"
+              onChange={handleChange}
+              placeholder="phone number"
+            ></input>
+            <i className="fa fa-user"></i>
+            <input
+            className="pl-5 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+              type="text"
+              name="password"
+              onChange={handleChange}
+              placeholder="password"
+            ></input>
+            <i className="fa fa-lock"></i>
+            <Recaptcha
+              sitekey="6LfE5h0bAAAAAO6yB7O3gshydGZFza32k9Wm5PHA"
+              render="explicit"
+              onloadCallback={recaptchaLoaded}
+              // verifyCallback={verifyCallback}
+            />
+            <div className="flex flex-row justify-center">
+              <button className="m-3 w-24 rounded-lg h-9 bg-gray-800 text-white border-none shadow-md" onClick={handleSubmit} type="submit">
+                Login
+              </button>
+            </div>
+            <div className="mt-5 flex justify-between text">         
+              <Link className="w-12 rounded-lg h-9 text-gray-800 font-semibold text-md border-none" to="/reset">Forgot password?</Link>
+              <Link className="w-12 rounded-lg h-9 text-gray-800 font-semibold text-md border-none" to="/">Register</Link>
+              <Link className="w-12 rounded-lg h-9 text-gray-800 font-semibold text-md border-none" to="/Admin">Admin</Link>
+            </div>
           </div>
-        </div>
-       
-        {/* <label>
-    remember me:
-    <input type="checkbox" value={checked} name="remember_me" onChange={switchmode} placeholder="remember me"/>
-  </label> */}
-        <div className="login_footer">
         
-          <Link to="/reset">forgot password?</Link>
-          <Link to="/">to register</Link>
-          <Link to="/Admin">Admin</Link>
-        </div>
+          {/* <label>
+      remember me:
+      <input type="checkbox" value={checked} name="remember_me" onChange={switchmode} placeholder="remember me"/>
+    </label> */}
+          
       </div>
     </>
   );

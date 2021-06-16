@@ -172,7 +172,7 @@ try{
     withdrwal:req.body.name,
     withdrwal_on:new Date().toISOString()
   };
-    const withdrawcoins = await AdminModal.findByIdAndUpdate(
+   const withdrawcoins = await AdminModal.findByIdAndUpdate(
       id,
     { $push: { withdrwal:withdrawtdata} },
     { new: true }
@@ -183,4 +183,16 @@ catch(err){
   console.log(err)  ;
 }
 }
-module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal} ; 
+const userdetails = async(req,res)=>{
+  console.log(req.params) ;   
+  const {id} = req.params ; 
+  try{
+const result =  await UserModal.findById(id) ; 
+console.log(result); 
+res.status(201).json({result:result});
+  }
+  catch(err){
+    console.log(err); 
+  }
+}
+module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails} ; 

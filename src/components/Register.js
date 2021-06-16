@@ -67,27 +67,26 @@ const Register = () => {
 //     console.log("captcha successfull");
 //   };
   return (
-    <div className="register">
-      <h1>Register</h1>
-      <form className="registerDetails">
+    <div className="w-full bg-back-img h-screen flex flex-col justify-items-center justify-center items-center">
+    <div className=" bg-yellow-400 p-8 rounded-2xl w-72 -mt-36">
+      <h1 className="items-center justify-center flex text-gray-800 font-semibold text-xl">Register</h1>
+      <form className="flex flex-col">
         {error !== null ? (
-          <h4 style={{ color: "red", fontWeight: "500" }}> {error}</h4>
+          <h4 className="text-red-600 font-semibold">{error}</h4>
         ) : (
           " "
         )}
-        <button style={{background:"none",position: "relative",
-    top: "46px",
-    left: "10px",
-    width: "34px",
-    height: "35px",}}>91+</button>
+        <button className="bg-gray-800 text-white relative top-8 rounded-xl left-1 w-10 h-7">91+</button>
         <input
+        className="pl-12 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="phone_number"
           onChange={handleChange}
           required
-          placeholder="phone number"
+          placeholder="Enter Phone Number"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="Real_name"
           onChange={handleChange}
@@ -95,20 +94,23 @@ const Register = () => {
           placeholder="Real Name"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="email"
           onChange={handleChange}
           required
-          placeholder="email"
+          placeholder="Email"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="bank_acc"
           onChange={handleChange}
           required
-          placeholder="Bank Acc for withdrwal"
+          placeholder="Bank Account for Withdrwal"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="ifsc"
           onChange={handleChange}
@@ -116,29 +118,33 @@ const Register = () => {
           placeholder="IFSC"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="password"
           name="password"
           onChange={handleChange}
           required
-          placeholder="Password and payment pass"
+          placeholder="Password"
         ></input>
         <input
+          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="password"
           name="confirmpassword"
           onChange={handleChange}
           required
-          placeholder="confirm password"
+          placeholder="Confirm Password"
         ></input>
         <div id="recaptcha-container"></div>
         
-        <div style={{ display: "flex", flexDirection: "row"  ,justifyContent:"space-between" }}>
-          <button className="signup-button" onClick={handleSubmit}>
+        <div className="flex flex-row justify-between">
+          <button className="m-3 w-24 rounded-lg h-9 bg-gray-800 text-white border-none shadow-md" onClick={handleSubmit}>
             Register
           </button>
-          <Link to="/Login">Signin </Link>
+          <Link className="m-3 w-12 rounded-lg h-9 text-gray-800 font-semibold text-lg border-none" to="/Login">Login</Link>
         </div>
       </form>
     </div>
+    
+  </div>
   );
 };
 export default Register;

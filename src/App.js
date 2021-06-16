@@ -21,6 +21,7 @@ import Withdrawal from "./components/Withdrawal";
 import LadderGame from './components/LadderGame';
 import Coinswithdrwal from './components/Coinswithdrwal';
 import Message from './components/Message';
+import AndarBahar from './components/AndarBahar';
 function App() {
 
     const [name, setName] = useState('');
@@ -115,6 +116,9 @@ function App() {
           <Route path="/laddergame" component={LadderGame}></Route>
           <Route path="/terms">
             <Terms/>
+          </Route>
+          <Route path="/andarbahar">
+            <AndarBahar></AndarBahar>
           </Route>
           <Route path="/privacypolicy">
             <PrivacyPolicy/>
