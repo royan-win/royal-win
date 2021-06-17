@@ -141,7 +141,6 @@ const Register = () => {
         <div id="recaptcha-container"></div>
         
         <div className="flex flex-row justify-between">
-        <button onClick={random}>random</button>
           <button className="m-3 w-24 rounded-lg h-9 bg-gray-800 text-white border-none shadow-md" onClick={handleSubmit}>
             Register
           </button>
