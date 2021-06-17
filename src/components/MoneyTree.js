@@ -72,8 +72,6 @@ const MoneyTree = () => {
   useEffect(() => {
     dispatch(history(historydata));
     myFunction()
-
-
   }, [numberofdraw])
 
   useEffect(() => {

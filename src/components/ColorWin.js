@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../redux/actions/auth';
+import { history } from '../redux/actions/MoneyTree';
 import {totalcoinsdata} from "../redux/actions/auth"
 import {useHistory} from "react-router-dom"; 
 function ColorWin() {
-    const history = useHistory();   
+    
     const dispatch = useDispatch(); 
     const user = JSON.parse(localStorage.getItem("profile"));
     var userid = user?.result?._id; 
@@ -18,8 +18,8 @@ var [value, setvalue] = useState([])
   const [time , setime] = useState(num) ;
 
 
-  const [open, setOpen] = useState(false);
-  const [color2, setColor2] = useState('');
+  
+  const [color2, setColor2] = useState('red');
   var [dice1 , setdice1] = useState(5);  
   const color1 = ['green', 'red', 'yellow'];
   const [color] = useState(
@@ -69,6 +69,9 @@ useEffect(() => {
  
   myFunction()
 }, [numberofdraw])
+var historydata = {
+  color2 , dice1
+}
 
 useEffect(() => {
   
@@ -78,7 +81,7 @@ useEffect(() => {
   let lastElement4 = dicehistory[dicehistory.length - 2];
   let lastElement5 = dicehistory[dicehistory.length - 1];
   var val=[lastElement5,lastElement4,lastElement3, lastElement2,lastElement1]
-
+  dispatch(history(historydata));
 setvalue(val) ; 
 
 }, [numberofdraw])
@@ -119,45 +122,45 @@ return (
     <div>
         
       <div className="relative bg-gray-100 pb-48">
-          {open && (
+          {
                 <ul className="list-none p-0 m-0">
                 <li className="pl-5 pr-12 hover:bg-yellow-400 hover:text-white">
                     <div className="flex flex-row">
                         <h1>{value[0]?.dice1}</h1>
-                        <h1>{value[0]?.dice2}</h1>
-                        <h1>{value[0]?.dice3}</h1>
+                        <h1>{value[0]?.color2}</h1>
+                    
                     </div>
                 </li>
                 <li>
                     <div className="flex flex-row">
                         <h1>{value[1]?.dice1}</h1>
-                        <h1>{value[1]?.dice2}</h1>
-                        <h1>{value[1]?.dice3}</h1>
+                        <h1>{value[1]?.color2}</h1>
+                      
                     </div>
                 </li>
                 <li>
                     <div className="flex flex-row">
                         <h1>{value[2]?.dice1}</h1>
-                        <h1>{value[2]?.dice2}</h1>
-                        <h1>{value[2]?.dice3}</h1>
+                        <h1>{value[2]?.color2}</h1>
+                     
                     </div>
                 </li>
                 <li>
                     <div className="flex flex-row">
                         <h1>{value[3]?.dice1}</h1>
-                        <h1>{value[3]?.dice2}</h1>
-                        <h1>{value[3]?.dice3}</h1>
+                        <h1>{value[3]?.color2}</h1>
+                      
                     </div>
                 </li>
                 <li>
                     <div className="flex flex-row">
                         <h1>{value[4]?.dice1}</h1>
-                        <h1>{value[4]?.dice2}</h1>
-                        <h1>{value[4]?.dice3}</h1>
+                        <h1>{value[4]?.color2}</h1>
+                       
                     </div>
                 </li>
             </ul>   
-          )} 
+          }
 <div className="flex p-3 justify-between">
     <div className="pt-10 pl-5">
     {time<10? 
@@ -169,7 +172,7 @@ return (
                     <div style={{backgroundColor: color2}} className="mt-2 ml-2 h-5 w-5 rounded-full"/>                   
             </div>
         </div>
-        </>:<h1>choose now</h1>
+        </>:<h1>choose</h1>
     }
     </div>
       <div className="mt-2 mr-3">
