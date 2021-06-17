@@ -127,7 +127,7 @@ const Login = () => {
             " "
           )}
             <input
-            className="pl-5 mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+            className="pl-5 text-white mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
               type="text"
               name="phone_number"
               onChange={handleChange}

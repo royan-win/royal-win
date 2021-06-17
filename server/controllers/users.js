@@ -38,7 +38,7 @@ const signup = async(req,res)=>{
      console.log(req.body) ; 
     try {
       
-      const oldUser = await UserModal.findOne({ $and: [ { phone_number }, {email } ] });
+      const oldUser = await UserModal.findOne({ $or: [ { phone_number }, {email } , {bank_acc}, {ifsc}  ] });
       console.log(oldUser) ; 
       if (oldUser) return res.status(400).json({ message: "User already exists" });
 

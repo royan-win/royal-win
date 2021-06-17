@@ -6,7 +6,7 @@ import fcbf5c from "./images/4color-bf/5C.svg"
 import fcbf6c from "./images/4color-bf/6C.svg"
 import fcbf7c from "./images/4color-bf/7C.svg"
 import fcbf8c from "./images/4color-bf/8C.svg"
-import fcbf9c from "./images/4color-bf/9C.svg"
+import fcbf9c from "./images/4color-bf/9C.svg"  
 import fcbfTc from "./images/4color-bf/TC.svg"
 import fcbfJc from "./images/4color-bf/JC.svg"
 import fcbfQc from "./images/4color-bf/QC.svg"
@@ -55,16 +55,15 @@ import fcbfQs from "./images/4color-bf/QS.svg"
 import fcbfKs from "./images/4color-bf/KS.svg"
 import fcbfAs from "./images/4color-bf/AS.svg";
 import b from "./images/back.svg";
-import { AiFillAccountBook, AiFillBackward } from "react-icons/ai"
-import { IoIosAdd, IoMdArrowBack } from "react-icons/io"
+import { IoMdArrowBack } from "react-icons/io"
 
-import { FaAccessibleIcon, FaMoon, FaSun } from "react-icons/fa"
+import {FaMoon, FaSun } from "react-icons/fa"
 import { useHistory } from 'react-router-dom';
-import { set } from 'mongoose';
-
-
+import {deposit} from "../redux/actions/auth" ; 
+import {totalcoinsdata} from "../redux/actions/auth"
+import { useDispatch} from 'react-redux';
 function AndarBahar() {
-
+  const dispatch = useDispatch(); 
 var num =30 ;
   const [time , setime] = useState(num) ;
   const [card, setCard] = useState('');
@@ -79,7 +78,6 @@ var num =30 ;
   const [mooncard5, setMoonCard5] = useState('');
   const [suncard5, setSunCard5] = useState('');
 const [result , setresult] = useState('') ; 
-const [value, setvalue] = useState('') ; 
 const [answer , setanswer] = useState(''); 
 const user = JSON.parse(localStorage.getItem("profile"));
 var userid = user?.result?._id; 
@@ -275,8 +273,6 @@ var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ;
         else{
             setanswer(false); 
         }
-       
-
      }
      useEffect(() => {
     if(card!=undefined){
@@ -302,7 +298,7 @@ var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ;
         console.log("hello");
         console.log(card)
         console.log(coins);
-        console.log(value);
+   
         if (answer) {  
           var coinsnumberofcoin = coins * 1.9;
           console.log(totalcoins); 
@@ -310,7 +306,8 @@ var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ;
           console.log(totalcoins); 
           setotalcoins(totalcoins); 
           console.log(coinsnumberofcoin);
-        //   dispatch(totalcoinsdata({totalcoins,userid})) ; 
+         dispatch(totalcoinsdata({totalcoins,userid})) ; 
+         dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
           alert(coinsnumberofcoin);
         }
       }

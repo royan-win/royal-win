@@ -24,24 +24,29 @@ const Register = () => {
     const name = e.target.name;
     const value = e.target.value;
     console.log(name, value);
+     
     setform({ ...formdata, [name]: value });
+    
   };
+  const random = ()=>{
+    let recaptcha = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    console.log(recaptcha);
+    let number = formdata.phone_number;
+    firebase.auth().signInWithPhoneNumber(number, recaptcha).then(function(e) {
+      let code = prompt('Enter OTP', '');
+      if(code == null) {
+        return;
+      } 
+      e.confirm(code).then((res) => {
+        console.log(res.user, "user");
+      })
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
   const handleSubmit = (e) => {
     // if (captcha) {
-        let recaptcha = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-        console.log(recaptcha);
-        let number = formdata.phone_number;
-        firebase.auth().signInWithPhoneNumber(number, recaptcha).then(function(e) {
-          let code = prompt('Enter OTP', '');
-          if(code == null) {
-            return;
-          } 
-          e.confirm(code).then((res) => {
-            console.log(res.user, "user");
-          })
-        }).catch((e) => {
-          console.log(e);
-        });
+        random() ;
         e.preventDefault();
       
       
@@ -136,6 +141,7 @@ const Register = () => {
         <div id="recaptcha-container"></div>
         
         <div className="flex flex-row justify-between">
+        <button onClick={random}>random</button>
           <button className="m-3 w-24 rounded-lg h-9 bg-gray-800 text-white border-none shadow-md" onClick={handleSubmit}>
             Register
           </button>
