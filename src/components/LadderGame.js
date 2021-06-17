@@ -20,7 +20,7 @@ function LadderGame() {
    const numberclick = useSelector(state => state?.auth?.laddergame)
 var [value, setvalue] = useState([]) 
 
-    var num =10 ;
+    var num =40 ;
   const [time , setime] = useState(num) ;
   
 
@@ -49,7 +49,7 @@ var [value, setvalue] = useState([])
         num = num-1; 
         setime(num) 
         if(num<1){
-             num=10;
+             num=40;
             numberofdraw = numberofdraw+1
             setnumberofdraw(numberofdraw)
             clearInterval(timeref)
@@ -107,7 +107,7 @@ const coinbuyed = (e) => {
   console.log("hello");
 
   console.log(numberclick);
-  if (numberclick == `${arrfirst}${arrsecond}` ) {  
+  if (numberclick == `${arrfirst}${arrsecond}` ||numberclick == `${arrfirst}`|| numberclick == `${arrsecond}` ) {  
     var coinsnumberofcoin = coins * 1.9;
     console.log(totalcoins); 
     totalcoins=coinsnumberofcoin+totalcoins
@@ -152,8 +152,13 @@ const coinbuyed = (e) => {
   <div className="flex p-3 justify-between">
   <div className="flex pt-10 pl-5">
     <div className="text-gray-900">
+    { time<10 ?
+    <>
       <button className="p-1 text-white mr-2 pl-3 pr-3 bg-gray-700 rounded-full">{arrfirst}</button>
           <button className="p-1 text-white pl-3 pr-3 bg-gray-700 rounded-full">{arrsecond}</button>
+          </>
+          :<h1>choose now</h1>
+    }
     </div>
   </div>
         <div className="mt-2 mr-3">
@@ -172,7 +177,9 @@ const coinbuyed = (e) => {
       </div>
       <div className="w-62 h-0.5 bg-gray-300"/>
       <div className="items-center ml-32 mt-3">
+      {time<10 &&
         <img src={arrimg} alt=""/>
+      }
       </div>
       <div>
         <div className="mt-5">
@@ -236,6 +243,7 @@ const coinbuyed = (e) => {
             </div>
         </div>
       </div>
+      {   time>10 && userid &&
       <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
         <div className="flex">
           <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>
@@ -246,6 +254,7 @@ const coinbuyed = (e) => {
           <button className="mt-4 mb-3 rounded-lg ml-16 p-2 pl-6 pr-6 bg-gray-600 font-semibold text-xl text-yellow-500" onClick={coinbuyed}>BUY</button>
         </div>
       </div>
+      }
 </div>
 </>
     )    

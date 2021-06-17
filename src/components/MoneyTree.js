@@ -10,7 +10,7 @@ const MoneyTree = () => {
   var [value, setvalue] = useState([])
   var [coins, setcoins] = useState(""); 
   var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
-  var num = 30;
+  var num = 40;
   const [time, setime] = useState(num);
   const [rollSum, setrollsum] = useState(13);
   const [nextrollsum, setnextrollsum] = useState("");
@@ -58,7 +58,7 @@ const MoneyTree = () => {
       num = num - 1;
       setime(num)
       if (num < 1) {
-        num = 31;
+        num = 41;
         numberofdraw = numberofdraw + 1
         setnumberofdraw(numberofdraw)
         clearInterval(timeref)
@@ -175,12 +175,17 @@ const MoneyTree = () => {
       <div className="relative bg-gray-100 pb-48">
         <div className="flex p-3 justify-between">
           <div className="flex pt-10 pl-5">
+           { time<10 ?
+           <>
             <div className="text-gray-900">
+            
               <button className="p-1 text-white pl-3 pr-3 bg-gray-700 rounded-full">{dice1}</button>{"+"}
               <button className="p-1 text-white pl-3 pr-3 bg-gray-700 rounded-full">{dice2}</button>{"+"}
               <button className="p-1 text-white pl-3 pr-3 bg-gray-700 rounded-full">{dice3}</button>{"="}
             </div>
             <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{rollSum}</div>
+            </> : <h1>choose now</h1>
+          }
           </div>
           <div className="mt-2 mr-3">
             <div className="flex">
@@ -328,7 +333,7 @@ const MoneyTree = () => {
             </div>
           </div>
         </div>
-        {userid&&
+        {   time>10 && userid &&
         <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
           <div className="flex">
             <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>

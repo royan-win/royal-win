@@ -14,7 +14,7 @@ function ColorWin() {
   var dicehistory = useSelector(state => state.History) ; 
 var [value, setvalue] = useState([]) 
 
-    var num =10 ;
+    var num =40 ;
   const [time , setime] = useState(num) ;
 
 
@@ -53,7 +53,7 @@ var [value, setvalue] = useState([])
         num = num-1; 
         setime(num) 
         if(num<1){
-             num=10;
+             num=40;
             numberofdraw = numberofdraw+1
             setnumberofdraw(numberofdraw)
             clearInterval(timeref)
@@ -160,6 +160,8 @@ return (
           )} 
 <div className="flex p-3 justify-between">
     <div className="pt-10 pl-5">
+    {time<10? 
+      <>
         <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{dice1}</div>
         <div className="flex items center">
             <h1 className="mt-2">Color:</h1> 
@@ -167,6 +169,8 @@ return (
                     <div style={{backgroundColor: color2}} className="mt-2 ml-2 h-5 w-5 rounded-full"/>                   
             </div>
         </div>
+        </>:<h1>choose now</h1>
+    }
     </div>
       <div className="mt-2 mr-3">
         <div className="flex">
@@ -281,6 +285,7 @@ return (
         </div>
       </div>
     </div>
+    {   time>10 && userid &&
     <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
       <div className="flex">
         <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>
@@ -293,6 +298,7 @@ return (
         >BUY</button>
       </div>
     </div>
+    }
 </div>
 </div>
   )    
