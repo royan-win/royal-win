@@ -156,7 +156,7 @@ console.log(req.body);
     );
 
     console.log(depositedcoins); 
-    res.status(201).json({result:depositedcoins});
+   
    }
   catch(err){
     console.log(err); 
@@ -183,6 +183,36 @@ catch(err){
   console.log(err)  ;
 }
 }
+
+
+const  adminDeposit = async(req,res)=>{
+  console.log(req.body) ; 
+  const id = "60c4a58ba4472a617063ad63"
+  
+try{
+  const deposit = {
+    deposit_Amount:req.body.formdata?.amount,
+    deposit_by:req.body.formdata?.name,
+    depositer_phone_no:req.body.formdata?.phone_no , 
+    depostier_email:req.body.formdata?.email,
+    depositer_id:req.body.id, 
+    depositer_screenshot:req?.body?.image, 
+    deposit_on:new Date().toISOString()
+  };
+   const depositcoins = await AdminModal.findByIdAndUpdate(
+      id,
+    { $push: { deposit:deposit}},
+    { new: true }
+  );
+  console.log(depositcoins); 
+}
+catch(err){
+  console.log(err)  ;
+}
+}
+
+
+
 const userdetails = async(req,res)=>{
   console.log(req.params) ;   
   const {id} = req.params ; 
@@ -195,4 +225,52 @@ res.status(201).json({result:result});
     console.log(err); 
   }
 }
-module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails} ; 
+const adminDepositDecline = async(req,res)=>{
+  // console.log(req.body) ; 
+  const {id} = req.body  ;
+  const _id = "60c4a58ba4472a617063ad63"
+try{
+  const olduser = UserModal.findById(id);
+   console.log(id)
+  const pullingout=await AdminModal.findByIdAndUpdate(
+    _id,
+  { $pull: {deposit:{depositer_id:id}}},
+  { new: true }
+  )
+  console.log(pullingout); 
+}catch(err){
+  console.log(err) ; 
+}
+}
+const adminDepositAllow = async(req,res)=>{
+  console.log(req.body) ; 
+  const {id , totalcoins} = req.body  ;
+  const _id = "60c4a58ba4472a617063ad63"
+try{
+  const olduser = await UserModal.findById(id);
+  olduser.coins = olduser.coins+totalcoins; 
+  await olduser.save();
+  const pullingout=await AdminModal.findByIdAndUpdate(
+    _id,
+  { $pull: {deposit:{depositer_id:id}}},
+  { new: true }
+  )
+  console.log(pullingout);
+
+}catch(err){
+  console.log(err) ; 
+}
+}
+const admindetails = async(req,res)=>{
+  console.log("hello"); 
+  try{
+    console.log("hello"); 
+    const id = "60c4a58ba4472a617063ad63"
+    const result  = await AdminModal.findById(id); 
+    res.status(201).json({result:result});
+    console.log(result);
+  }catch(err){
+console.log(err); 
+  }
+}
+module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails, adminDeposit , adminDepositAllow ,  adminDepositDecline , admindetails} ; 

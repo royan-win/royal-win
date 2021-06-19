@@ -7,7 +7,15 @@ withdrwal :{
     withdrwal:{type:String} , 
     withdrwal_on:{type:Date},
     default:{}, 
-},  
+}, 
+deposit :{
+    deposit_Amount:{type:Number},
+    depositer_id:{type:String},
+    deposit_by:{type:String} , 
+    deposit_on:{type:Date},
+    depositer_screenshot:{type:String}, 
+    default:{}, 
+}, 
 });
 
 const Admins= mongoose.model("Admins", adminSchema);

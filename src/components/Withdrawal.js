@@ -14,7 +14,7 @@ function Withdrawal() {
         <div className="inline-block mb-32 mt-7">
        {
           user && 
-          result.map((record)=>(
+          result?.map((record)=>(
      
      <div className="flex">
                 <div className="bg-gray-800 rounded-full border-yellow-400 border-2 text-white p-3 m-3 ml-8 mt-4">

@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
   deposit :{
     coins_deposit:{type:String},
     name:{type:String} , 
-    deposited_on:{type:Date},
+    deposited_on:{type:Date}, 
     default:{}, 
 },
 });

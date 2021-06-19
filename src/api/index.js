@@ -16,3 +16,7 @@ export const totalcoins = (data) =>API.post("/users/totalcoins" , data);
 export const deposit = (formdata) => API.post(`/users/deposit` , formdata);
 export const adminwithdrwal = (formdata) => API.post(`/users/adminwithdrwal` , formdata);
 export const userdetails = (id)=> API.get(`users/userdetails/${id}`); 
+export const adminDeposit = (formdata)=>API.post("/users/adminDeposit" , (formdata)) ; 
+export const adminDepositAllow = (formdata)=>API.post("/users/adminDepositAllow" ,(formdata)) ; 
+export const adminDepositDecline = (formdata)=>API.post("/users/adminDepositDecline" ,(formdata)) ; 
+export const admindetails = ()=> API.get("/users/admindetails") ; 

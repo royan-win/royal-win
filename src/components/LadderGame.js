@@ -110,11 +110,10 @@ const numberClicked = (e)=>{
 const coinbuyed = (e) => {
   e.preventDefault();
   console.log("hello");
-
   console.log(numberclick);
-  if (numberclick == `${arrfirst}${arrsecond}` ||numberclick == `${arrfirst}`|| numberclick == `${arrsecond}` ) {  
+  if(userid){
+  if (numberclick == `${arrfirst}${arrsecond}` ||numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`){  
     var coinsnumberofcoin = coins * 1.9;
-    console.log(totalcoins); 
     totalcoins=coinsnumberofcoin+totalcoins
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
@@ -123,6 +122,17 @@ const coinbuyed = (e) => {
     dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
     alert(`congrats , you win more ${coinsnumberofcoin} coins`);
   }
+  else{
+    totalcoins=totalcoins-coins; 
+    setotalcoins(totalcoins);
+    dispatch(totalcoinsdata({totalcoins,userid})) ;
+    alert(`oops wrong answer`);
+
+  }
+}
+else{
+  alert("please login") ; 
+}
 }
     return (
       <>
@@ -247,7 +257,7 @@ const coinbuyed = (e) => {
             </div>
         </div>
       </div>
-      {   time>10 && userid &&
+      {   time>10 && 
       <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
         <div className="flex">
           <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>

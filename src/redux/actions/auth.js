@@ -74,7 +74,7 @@ export const admin = (formdata , history) =>async(dispatch)=>{
     try{
         console.log(formdata) ; 
         const {data} = await api.admin(formdata); 
-        console.log(data);  
+        console.log(data);
         const datadetails = {
             result:data?.result , 
             token:data?.token,
@@ -130,5 +130,48 @@ export const userdetails = (id)=>async(dispatch)=>{
        
     }catch(err){
         console.log(err); 
+    }
+}
+
+export const  adminDeposit = (formdata)=>async(dispatch)=>{
+console.log(formdata) ; 
+try{
+    
+    alert("deposit request send!!");
+const {data} = await api.adminDeposit(formdata);
+ 
+
+console.log(data) ; 
+}catch(err){
+    console.log(err); 
+}
+}
+export const adminDepositAllow = (formdata) =>async(dispatch)=>{
+    console.log(formdata); 
+    
+    try{
+        alert("money deposited in user account");
+        const {data} = api.adminDepositAllow(formdata) ; 
+        console.log(data) ; 
+    }catch(err){
+        console.log(err)
+    }
+}
+export const adminDepositDecline = (formdata) =>async(dispatch)=>{
+    console.log(formdata); 
+    try{
+        const {data} = api.adminDepositDecline(formdata) ; 
+    }catch(err){
+        console.log(err)
+    }
+}
+export const admindetails = ()=>async(dispatch)=>{
+    try{
+        const {data} = await api.admindetails() ;
+        console.log(data) ;  
+        dispatch({type:"AUTH" , data});
+      
+    }catch(err){
+        console.log(err) ; 
     }
 }

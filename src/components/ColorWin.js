@@ -105,6 +105,7 @@ const coinbuyed = (e) => {
   console.log(dice1)
   console.log(coins);
   console.log(numberclick);
+  if(userid){
   if (numberclick == dice1) {  
     var coinsnumberofcoin = coins * 9.1;
     console.log(totalcoins); 
@@ -115,6 +116,16 @@ const coinbuyed = (e) => {
     dispatch(totalcoinsdata({totalcoins,userid})) ; 
     alert(coinsnumberofcoin);
   }
+  else{
+    totalcoins=totalcoins-coins; 
+    setotalcoins(totalcoins);
+    dispatch(totalcoinsdata({totalcoins,userid})) ;
+    alert(`oops! wrong answer`);
+  }
+}
+else{
+  alert("please login") ; 
+}
 }
 
 
@@ -288,7 +299,7 @@ return (
         </div>
       </div>
     </div>
-    {   time>10 && userid &&
+    {   time>10 && 
     <div className="block fixed inset-x-0 text-white bottom-12 z-11 bg-gray-800 shadow-lg rounded-t-3xl">
       <div className="flex">
         <h1 className="pt-6 pl-3 font-semibold text-xl text-yellow-500">Coins</h1>
