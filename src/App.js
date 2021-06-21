@@ -22,6 +22,7 @@ import LadderGame from './components/LadderGame';
 import Coinswithdrwal from './components/Coinswithdrwal';
 import Message from './components/Message';
 import AndarBahar from './components/AndarBahar';
+import Edithomepage from "./components/Edithomepage" ; 
 function App() {
 
     const [name, setName] = useState('');
@@ -137,6 +138,9 @@ function App() {
           </Route>
           <Route path="/message">
             <Message></Message>
+          </Route>
+          <Route path="/edithomepage">
+          <Edithomepage></Edithomepage>
           </Route>
           {admindata?.result?._id !=="60c4a58ba4472a617063ad63" && 
           <Route path="/home" component={Home}>

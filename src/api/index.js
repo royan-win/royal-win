@@ -19,4 +19,6 @@ export const userdetails = (id)=> API.get(`users/userdetails/${id}`);
 export const adminDeposit = (formdata)=>API.post("/users/adminDeposit" , (formdata)) ; 
 export const adminDepositAllow = (formdata)=>API.post("/users/adminDepositAllow" ,(formdata)) ; 
 export const adminDepositDecline = (formdata)=>API.post("/users/adminDepositDecline" ,(formdata)) ; 
-export const admindetails = ()=> API.get("/users/admindetails") ; 
+export const admindetails = ()=> API.get("/users/admindetails") ;
+export const homepage = (formdata)=> API.post("/users/homepage" , (formdata));  
+export const gethomepageimage  = () =>API.get("/users/gethomepageimage");

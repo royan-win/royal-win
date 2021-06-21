@@ -105,7 +105,7 @@ const coinbuyed = (e) => {
   console.log(dice1)
   console.log(coins);
   console.log(numberclick);
-  if(userid){
+  if(userid){ 
   if (numberclick == dice1) {  
     var coinsnumberofcoin = coins * 9.1;
     console.log(totalcoins); 

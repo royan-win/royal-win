@@ -1,4 +1,4 @@
-const authreducers = (state ={authdata:null , error:null , userswithdrwal:[] , userdetails:[] , laddergame:null}, action )=>{
+const authreducers = (state ={authdata:null , error:null , userswithdrwal:[] , userdetails:[] , laddergame:null  ,gethomeimage:null}, action )=>{
     switch (action.type) {
         case "AUTH":
           localStorage.setItem('profile' , JSON.stringify({...action?.data})) ; 
@@ -19,7 +19,10 @@ const authreducers = (state ={authdata:null , error:null , userswithdrwal:[] , u
            return{
              laddergame:action.data
            }  
-           
+           case "GETHOMEIMAGE":
+             return {
+              gethomeimage:action.data
+             }
         default:
             return state  ; 
     }

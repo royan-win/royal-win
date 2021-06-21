@@ -127,7 +127,7 @@ const MoneyTree = () => {
     console.log(rollSum)
     console.log(coins);
     console.log(numberclick);
-    if (numberclick == dice1) {  
+ 
     if (numberclick == rollSum) {  
       var coinsnumberofcoin = coins * 1.9;
       console.log(totalcoins); 
@@ -145,10 +145,8 @@ const MoneyTree = () => {
       dispatch(totalcoinsdata({totalcoins,userid})) ;
       alert(`oops! wrong answer`);
     }
-  }
-  else{
-    alert("please login") ; 
-  } 
+  
+
   }
 
 

@@ -175,3 +175,21 @@ export const admindetails = ()=>async(dispatch)=>{
         console.log(err) ; 
     }
 }
+export const homepage = (formdata)=>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+        const {data}  = await api.homepage(formdata) ; 
+        console.log(data); 
+    }catch(err){
+        console.log(err) ; 
+    }
+}
+export const gethomepageimage = ()=>async(dispatch)=>{
+    try{
+        const {data} = await api.gethomepageimage() ; 
+        console.log(data) ; 
+        dispatch({type:"GETHOMEIMAGE" , data}) ; 
+    }catch(err){
+        console.log(err) ; 
+    }
+}

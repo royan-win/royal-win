@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs") ; 
 const jwt = require("jsonwebtoken") ; 
 const UserModal = require("../models/users") ; 
-const AdminModal = require("../models/admin"); 
+const AdminModal = require("../models/admin");
+const HomePageModal = require("../models/Homepage");  
 var nodemailer = require('nodemailer');
 const { db } = require("../models/users");
 var transporter = nodemailer.createTransport(({
@@ -109,7 +110,7 @@ catch(err){
 const admin = async(req,res)=>{
 const {username,password} = req.body ; 
 try{
- const oldUser = await AdminModal.findOne( { $and: [ { username:username }, { password:password} ] } )
+ const oldUser = await AdminModal.findOne( { $and: [ { username:username }, {password:password} ] } )
 console.log(oldUser) ;  
 if(oldUser){
 var userdetails = await UserModal.find(); 
@@ -273,4 +274,32 @@ const admindetails = async(req,res)=>{
 console.log(err); 
   }
 }
-module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails, adminDeposit , adminDepositAllow ,  adminDepositDecline , admindetails} ; 
+
+const homepage = async(req,res)=>{
+  console.log(req.body) 
+  const id= "60d0768a07faca22b4ede368"
+  try{
+    console.log(req.body.image1, req.body.image2 , req.body.image3)
+  const homepageimage = await HomePageModal.findOne() ;  
+ const result =  await HomePageModal.findByIdAndUpdate(id,{
+   image1:req.body.image1===undefined ?homepageimage.image1:req.body.image1,
+   image2:req.body.image2===undefined ?homepageimage.image2:req.body.image2,
+   image3:req.body.image3===undefined ?homepageimage.image3:req.body.image3,},
+    { new: true });
+  console.log(result); 
+  }catch(err){
+    console.log(err) ; 
+  }
+}
+
+const gethomepageimage = async(req,res)=>{
+  try{
+    const result = await HomePageModal.findOne() ; 
+    console.log(result)  ;
+    res.status(201).json(result);
+  }catch(err){
+    console.log(err); 
+  }
+}
+module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails, adminDeposit , adminDepositAllow ,  adminDepositDecline , admindetails ,homepage , 
+  gethomepageimage} ; 

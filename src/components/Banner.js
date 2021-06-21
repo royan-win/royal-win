@@ -1,9 +1,19 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { AiFillGift, AiFillMessage, AiFillSound } from 'react-icons/ai';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import  {useDispatch , useSelector} from "react-redux" ; 
+import {useLocation} from "react-router-dom" ; 
+import {gethomepageimage} from "../redux/actions/auth" ; 
 function Banner() {
+    const location = useLocation() ; 
+    const dispatch = useDispatch()
+    const images = useSelector(state => state.auth.gethomeimage) ; 
+  
+    useEffect(() => {
+        dispatch(gethomepageimage()) ; 
+    }, [location])
+
     return (
         <div className="relative z-0">
             <Carousel
@@ -15,15 +25,15 @@ function Banner() {
             interval={5000}
             >
                 <div>
-                    <img loading="lazy" src="https://images-eu.ssl-images-amazon.com/images/G/31/AmazonVideo/2021/X-site/Multititle/May/M17/non-reg/1500x600_Hero-Tall_JPN._CB668432235_.jpg" alt=""/>
+                    <img style={{height:"700px"}} loading="lazy" src={images?.image1} alt=""/>
                 </div>
 
                 <div>
-                    <img loading="lazy" src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/Fashion/Gateway/Flip/Essentials_Experience_May21/Revised_EE_Graphics/GW_PC_BUNK_1500x600._CB668893605_.jpg" alt=""/>
+                    <img style={{height:"700px"}} loading="lazy" src={images?.image2} alt=""/>
                 </div>
 
                 <div>
-                    <img loading="lazy" src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/CEPC/Essentials/D23636912_IN_CEPC_BAU_essentals_graphics_May21_3000x12000.5x_2._CB668898249_.jpg" alt=""/>
+                    <img style={{height:"700px"}} loading="lazy" src={images?.image3} alt=""/>
                 </div>
             </Carousel>
             <div className="p-2 flex space-x-4 justify-between">
