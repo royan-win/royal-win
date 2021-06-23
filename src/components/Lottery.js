@@ -12,7 +12,7 @@ function Lottery() {
                     </div>
                 </div>
             </div>
-            <div className="flex border-4 cursor-pointer border-gray-500 hover:border-yellow-400 hover:bg-gray-900 w-72 rounded-2xl items-center p-2">
+            <div  className="flex border-4 cursor-pointer border-gray-500 hover:border-yellow-400 hover:bg-gray-900 w-72 rounded-2xl items-center p-2">
                 <img className="p-2 h-32" src="https://sgp.resourceddos.com/sgp/sun/pc/resource/F6/CC/F6CCA12DE07E4433B8851A182222262B.webp" alt=""/>
                 <div className="inline-block pl-5 items-center">
                     <h2 className="pb-8 text-lg font-semibold">Ladder Game</h2>

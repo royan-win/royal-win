@@ -12,7 +12,6 @@ const AdminDeposit = () => {
    const result = user?.result?.deposit;
    useEffect(() => {
     dispatch(admindetails())
-    
    }, [location , dispatch])
     return (
 

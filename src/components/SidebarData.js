@@ -4,6 +4,12 @@ import { IoMdPaper } from 'react-icons/io';
 
 export const SidebarData = [
     {
+        title: "Home",
+        path:"/Home",
+        icon: <AiIcons.AiFillHome/>,
+        cName:"pt-8 pr-10 pb-8 pl-10 flex justify-start items-center h-10 list-none text-white text-md rounded hover:bg-blue-400"
+    },
+    {
         title: "Bank Account",
         path:"/bankaccount",
         icon: <AiIcons.AiFillBank/>,
@@ -27,12 +33,7 @@ export const SidebarData = [
         icon: <FaIcons.FaEnvelopeOpenText/>,
         cName:"pt-8 pr-10 pb-8 pl-10 flex justify-start items-center h-10 list-none text-white text-md rounded hover:bg-blue-400"
     },
-    {
-        title: "Favorite",
-        path:"/favorite",
-        icon: <AiIcons.AiFillHeart/>,
-        cName:"pt-8 pr-10 pb-8 pl-10 flex justify-start items-center h-10 list-none text-white text-md rounded hover:bg-blue-400"
-    },
+  
     {
         title: "Complain",
         path:"/complain",

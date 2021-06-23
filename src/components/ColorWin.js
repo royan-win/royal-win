@@ -19,8 +19,8 @@ var [value, setvalue] = useState([])
 
 
   
-  const [color2, setColor2] = useState('red');
-  var [dice1 , setdice1] = useState(5);  
+  const [color2, setColor2] = useState('');
+  var [dice1 , setdice1] = useState();  
   const color1 = ['green', 'red', 'yellow'];
   const [color] = useState(
       Math.floor(Math.random())
@@ -42,10 +42,7 @@ var [value, setvalue] = useState([])
   let[numberofdraw , setnumberofdraw]  =useState(0) ; 
   var [numberclick, setnumberclick] = useState();
  
-  const diceRoll = ()=>{
-    const dice1=Math.floor(Math.random() * 2) + 1 ; 
-    setdice1(dice1) ; 
-  }
+ 
 
   
   function myFunction() {
@@ -57,8 +54,8 @@ var [value, setvalue] = useState([])
             numberofdraw = numberofdraw+1
             setnumberofdraw(numberofdraw)
             clearInterval(timeref)
-            diceRoll();    
-            myFunction(); 
+           
+        
             setColor2(color1[Math.floor(Math.random() * color1.length)]);
         }
     },
@@ -85,19 +82,19 @@ useEffect(() => {
 setvalue(val) ; 
 
 }, [numberofdraw])
-var arr1 = [0,1,2,3,4,5,6,7,8,9] ; 
-var arr2=[]; 
+useEffect(() => {
 
+    const dice1=Math.floor(Math.random() * 2) + 1 ; 
+    setdice1(dice1) ; 
 
+}, [numberofdraw , dice1])
 const numberClicked = (e)=>{
    e.preventDefault();
    setnumberclick(e.target.value);
    console.log(numberclick);
-  
-   arr2 = arr1.filter((arr1) => e.target.value != arr1);
-//    console.log(dice1);
-  
+
 }
+
 
 const coinbuyed = (e) => {
   e.preventDefault();
@@ -106,7 +103,7 @@ const coinbuyed = (e) => {
   console.log(coins);
   console.log(numberclick);
   if(userid){ 
-  if (numberclick == dice1) {  
+  if (numberclick == dice1 || numberclick == color2) {  
     var coinsnumberofcoin = coins * 9.1;
     console.log(totalcoins); 
     totalcoins=coinsnumberofcoin+totalcoins
@@ -206,21 +203,21 @@ return (
         <div className="grid grid-flow-col">
           <div className="inline-block mr-2 ml-2 p-2 bg-gray-800 rounded-lg items-center">
               <div className="flex items-center pl-2">
-                <h1 className="text-green-300 text-md pr-2">GREEN</h1>
+                <button onClick={numberClicked} value="green" className="text-green-300 text-md pr-2">GREEN</button>
                 <div className="mt-2 ml-2 h-7 w-7 rounded-full bg-green-600"/>
               </div>
             <p className="text-white text-sm pl-9 pt-2">2.02</p>
           </div>
           <div className="inline-block mr-2 ml-2 p-2 bg-gray-800 rounded-lg items-center">
               <div className="flex items-center pl-2">
-                <h1 className="text-red-300 text-md pr-2">RED</h1>
+                <button onClick={numberClicked} value="red" className="text-red-300 text-md pr-2">RED</button>
                 <div className="mt-2 ml-2 h-7 w-7 rounded-full bg-red-500"/>
               </div>
             <p className="text-white text-sm pl-7 pt-2">2.02</p>
           </div>
           <div className="inline-block mr-2 ml-2 p-2 bg-gray-800 rounded-lg items-center">
               <div className="flex items-center pl-2">
-                <h1 className="text-yellow-300 text-md pr-2">YELLOW</h1>
+                <button onClick={numberClicked} value="Yellow" className="text-yellow-300 text-md pr-2">YELLOW</button>
                 <div className="mt-2 ml-2 h-7 w-7 rounded-full bg-yellow-500"/>
               </div>
             <p className="text-white text-sm pl-10 pt-2">4.51</p>

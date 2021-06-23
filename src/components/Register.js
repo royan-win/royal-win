@@ -83,7 +83,7 @@ const Register = () => {
         )}
         <button className="bg-gray-800 text-white relative top-8 rounded-xl left-1 w-10 h-7">91+</button>
         <input
-        className="pl-12 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+        className="pl-12 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="phone_number"
           onChange={handleChange}
@@ -91,7 +91,7 @@ const Register = () => {
           placeholder="Enter Phone Number"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="Real_name"
           onChange={handleChange}
@@ -99,7 +99,7 @@ const Register = () => {
           placeholder="Real Name"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="email"
           onChange={handleChange}
@@ -107,7 +107,7 @@ const Register = () => {
           placeholder="Email"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="bank_acc"
           onChange={handleChange}
@@ -115,7 +115,7 @@ const Register = () => {
           placeholder="Bank Account for Withdrwal"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="text"
           name="ifsc"
           onChange={handleChange}
@@ -123,7 +123,7 @@ const Register = () => {
           placeholder="IFSC"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="password"
           name="password"
           onChange={handleChange}
@@ -131,7 +131,7 @@ const Register = () => {
           placeholder="Password"
         ></input>
         <input
-          className=" outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+          className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
           type="password"
           name="confirmpassword"
           onChange={handleChange}

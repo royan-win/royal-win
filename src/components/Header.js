@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import {Link} from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai"
@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons/lib';
 import { useHistory } from "react-router-dom";
+import {useLocation} from "react-router-dom"  ;
 function Header() {
-    
+    const location = useLocation() ; 
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => {
         setSidebar(!sidebar);
@@ -18,10 +19,11 @@ function Header() {
         dispatch({ type: "LOGOUT" });
         history.push("/");
       };
+      useEffect(() => {
+        JSON.parse(localStorage.getItem("profile"));
+      }, [location])
     const user = JSON.parse(localStorage.getItem("profile"));
     var userid = user?.result?._id; 
-   
-
     var coins = Math.floor(user?.result?.coins);
     return (
         <header>

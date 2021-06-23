@@ -14,9 +14,11 @@ const MoneyTree = () => {
   const [time, setime] = useState(num);
   const [rollSum, setrollsum] = useState(13);
   const [nextrollsum, setnextrollsum] = useState("");
-  var [dice1, setdice1] = useState(5);
-  var [dice2, setdice2] = useState(1);
-  var [dice3, setdice3] = useState(7);
+  var [dice1, setdice1] = useState("");
+  var [dice2, setdice2] = useState("");
+  var [dice3, setdice3] = useState("");
+  var [size , setsize] = useState(""); 
+var [type , settype] = useState("");
   const [data, setdata] = useState({
     3: "",
     4: "",
@@ -25,7 +27,7 @@ const MoneyTree = () => {
     7: "",
     8: "",
     9: "",
-    10: "",
+    10:"",
     11: "",
     12: "",
     13: "",
@@ -39,16 +41,7 @@ const MoneyTree = () => {
   var timeref;
   let [numberofdraw, setnumberofdraw] = useState(0);
 
-  const diceRoll = () => {
-    const dice1 = Math.floor(Math.random() * 6) + 1;
-    setdice1(dice1);
-    const dice2 = Math.floor(Math.random() * 6) + 1;
-    setdice2(dice2);
-    const dice3 = Math.floor(Math.random() * 6) + 1;
-    setdice3(dice3);
-    const sum = dice1 + dice2 + dice3;
-    setrollsum(sum);
-  }
+
   var historydata = {
     dice1, dice2, dice3, rollSum
   }
@@ -62,12 +55,24 @@ const MoneyTree = () => {
         numberofdraw = numberofdraw + 1
         setnumberofdraw(numberofdraw)
         clearInterval(timeref)
-        diceRoll();
-        myFunction();
+   
       }
     },
       1000);
   }
+var sizearr = ["large" , "small"] ; 
+
+ useEffect(() => {
+  setsize(sizearr[Math.floor(Math.random() * sizearr.length)]);
+  const dice1 = Math.floor(Math.random() * 6) + 1;
+  setdice1(dice1);
+  const dice2 = Math.floor(Math.random() * 6) + 1;
+  setdice2(dice2);
+  const dice3 = Math.floor(Math.random() * 6) + 1;
+  setdice3(dice3);
+  const sum = dice1 + dice2 + dice3;
+  setrollsum(sum);
+ }, [numberofdraw , dice1 , dice2 , dice3]) ; 
 
   useEffect(() => {
     dispatch(history(historydata));
@@ -86,49 +91,31 @@ const MoneyTree = () => {
     setvalue(val);
 
   }, [numberofdraw])
-  var arr1 = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-  var arr2 = [];
-  
+
 
 
   const numberClicked = (e) => {
     e.preventDefault();
     setnumberclick(e.target.value);
-    console.log(numberclick);
-    if (e.target.value == rollSum) {
-      // alert("write answer"); 
+    if(e.target.value %2==0){
+      settype("even"); 
     }
-    arr2 = arr1.filter((arr1) => e.target.value != arr1);
-    // setrollsum(arr2[Math.floor(Math.random() * 18) + 1]); 
+    else{
+      settype("odd"); 
+    }
+    console.log(numberclick); 
     console.log(rollSum);
   }
 
-  // useEffect(() => {
-  // if(nextrollsum!=undefined){
-  // arr2= arr1.filter((arr1) =>nextrollsum !=arr1 );
-  // setrollsum(arr2[Math.floor(Math.random() * 18) + 1]); 
-  // console.log(rollSum); 
-  // }
-  // }, [numberofdraw]); 
 
-  // else{
-  //   myFunction(); 
-  // }
-
-  // const coinsinput = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(name, value);
-  //   setcoins({ ...coins.numberofcoins, [name]: value });
-  // }
   const coinbuyed = (e) => {
     e.preventDefault();
     console.log("hello");
     console.log(rollSum)
     console.log(coins);
     console.log(numberclick);
- 
-    if (numberclick == rollSum) {  
+    if(userid){
+    if (numberclick == rollSum ||numberclick == size || numberclick == type ) {  
       var coinsnumberofcoin = coins * 1.9;
       console.log(totalcoins); 
       totalcoins=coinsnumberofcoin+totalcoins
@@ -145,7 +132,10 @@ const MoneyTree = () => {
       dispatch(totalcoinsdata({totalcoins,userid})) ;
       alert(`oops! wrong answer`);
     }
-  
+    }
+    else{
+      alert("please login") ; 
+    }
 
   }
 
@@ -192,6 +182,7 @@ const MoneyTree = () => {
               <button className="p-1 text-white pl-3 pr-3 bg-gray-700 rounded-full">{dice3}</button>{"="}
             </div>
             <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{rollSum}</div>
+            <div className="text-white p-1 pr-3 pl-3 bg-gray-700 rounded-md h-8">{size}</div>
             </> : <h1>choose now</h1>
           }
           </div>
@@ -210,23 +201,24 @@ const MoneyTree = () => {
           </div>
         </div>
         <div>
+          
           <div className="mt-5">
             <h1 className="text-lg pl-5 p-1 font-medium bg-gray-700 text-white mb-1">Sum Type</h1>
             <div className="grid grid-flow-col">
               <div className="inline-block mr-2 ml-2 p-2 bg-gray-800 rounded-lg items-center">
-                <h1 className="text-yellow-600 text-md">LARGE</h1>
+                <button value="large" onClick={numberClicked} className="text-yellow-600 text-md">LARGE</button>
                 <p className="text-white text-sm">1.9</p>
               </div>
               <div value="small" className="inline-block mr-2 p-2 bg-gray-800 rounded-lg items-center">
-                <h1 className="text-yellow-600 text-md">SMALL</h1>
+                <button value="small" onClick={numberClicked} className="text-yellow-600 text-md">SMALL</button>
                 <p className="text-white text-sm">1.9</p>
               </div>
               <div className="inline-block mr-2 p-2 bg-gray-800 rounded-lg items-center">
-                <h1 className="text-yellow-600 text-md">ODD</h1>
+                <button value="odd" onClick={numberClicked} className="text-yellow-600 text-md">ODD</button>
                 <p className="text-white text-sm">1.9</p>
               </div>
               <div className="inline-block mr-2 p-2 bg-gray-800 rounded-lg items-center">
-                <h1 className="text-yellow-600 text-md">EVEN</h1>
+                <h1 value="even" className="text-yellow-600 text-md">EVEN</h1>
                 <p className="text-white text-sm">1.9</p>
               </div>
             </div>

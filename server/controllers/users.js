@@ -166,7 +166,7 @@ console.log(req.body);
 };
 const  adminwithdrwal = async(req,res)=>{
   console.log(req.body) ; 
-  const id = "60c4a58ba4472a617063ad63"
+  const id = "60d1ba7eda557fca1ae356c1"
 try{
   const withdrawtdata = {
     coins_withdrwal:req.body.withdrwal,
@@ -188,7 +188,7 @@ catch(err){
 
 const  adminDeposit = async(req,res)=>{
   console.log(req.body) ; 
-  const id = "60c4a58ba4472a617063ad63"
+  const id = "60d1ba7eda557fca1ae356c1"
   
 try{
   const deposit = {
@@ -229,7 +229,7 @@ res.status(201).json({result:result});
 const adminDepositDecline = async(req,res)=>{
   // console.log(req.body) ; 
   const {id} = req.body  ;
-  const _id = "60c4a58ba4472a617063ad63"
+  const _id = "60d1ba7eda557fca1ae356c1"
 try{
   const olduser = UserModal.findById(id);
    console.log(id)
@@ -246,7 +246,7 @@ try{
 const adminDepositAllow = async(req,res)=>{
   console.log(req.body) ; 
   const {id , totalcoins} = req.body  ;
-  const _id = "60c4a58ba4472a617063ad63"
+  const _id = "60d1ba7eda557fca1ae356c1"
 try{
   const olduser = await UserModal.findById(id);
   olduser.coins = olduser.coins+totalcoins; 
@@ -266,7 +266,7 @@ const admindetails = async(req,res)=>{
   console.log("hello"); 
   try{
     console.log("hello"); 
-    const id = "60c4a58ba4472a617063ad63"
+    const id = "60d1ba7eda557fca1ae356c1"
     const result  = await AdminModal.findById(id); 
     res.status(201).json({result:result});
     console.log(result);
@@ -277,11 +277,11 @@ console.log(err);
 
 const homepage = async(req,res)=>{
   console.log(req.body) 
-  const id= "60d0768a07faca22b4ede368"
+  const id= "60d1bb76da557fca1ae356c2"
   try{
     console.log(req.body.image1, req.body.image2 , req.body.image3)
   const homepageimage = await HomePageModal.findOne() ;  
- const result =  await HomePageModal.findByIdAndUpdate(id,{
+ const result =  await HomePageModal.findByIdAndUpdate(id,{  
    image1:req.body.image1===undefined ?homepageimage.image1:req.body.image1,
    image2:req.body.image2===undefined ?homepageimage.image2:req.body.image2,
    image3:req.body.image3===undefined ?homepageimage.image3:req.body.image3,},

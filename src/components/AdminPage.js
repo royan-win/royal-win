@@ -3,6 +3,7 @@ import { Tabs, Tab } from "@material-ui/core";
  import Withdrawal from './Withdrawal.js';
 import UserInfo from './Userdetails';
 import AdminDeposit from './AdminDeposit.js';
+import Edithomepage from "./Edithomepage.js" ; 
 function Admin() {
     const [selectedTab, setSelectedTab] = useState(0);
 
@@ -28,10 +29,12 @@ function Admin() {
                 <Tab style={tabStyle.active_tab} label="Withdrawal"/>
                 <Tab style={tabStyle.active_tab} label="User's Info"/>
                 <Tab style={tabStyle.active_tab} label="Deposit"/>
+                <Tab style={tabStyle.active_tab} label="Home page images"/>
             </Tabs>
             {selectedTab === 0 && <Withdrawal/>}
             {selectedTab === 1 && <UserInfo/>}
             {selectedTab === 2 && <AdminDeposit/>}
+            {selectedTab ===3 && <Edithomepage/>}
         </div>
     )
 }
