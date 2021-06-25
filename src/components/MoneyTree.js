@@ -8,7 +8,8 @@ const MoneyTree = () => {
   var userid = user?.result?._id; 
   var dicehistory = useSelector(state => state.History);
   var [value, setvalue] = useState([])
-  var [coins, setcoins] = useState(""); 
+  var [coins, setcoins] = useState("");
+  const [timeatclick , settimeatclick] = useState(null) ;  
   var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
   var num = 40;
   const [time, setime] = useState(num);
@@ -55,7 +56,6 @@ var [type , settype] = useState("");
         numberofdraw = numberofdraw + 1
         setnumberofdraw(numberofdraw)
         clearInterval(timeref)
-   
       }
     },
       1000);
@@ -63,6 +63,7 @@ var [type , settype] = useState("");
 var sizearr = ["large" , "small"] ; 
 
  useEffect(() => {
+  myFunction()
   setsize(sizearr[Math.floor(Math.random() * sizearr.length)]);
   const dice1 = Math.floor(Math.random() * 6) + 1;
   setdice1(dice1);
@@ -72,11 +73,11 @@ var sizearr = ["large" , "small"] ;
   setdice3(dice3);
   const sum = dice1 + dice2 + dice3;
   setrollsum(sum);
- }, [numberofdraw , dice1 , dice2 , dice3]) ; 
+ }, [numberofdraw]);
 
   useEffect(() => {
     dispatch(history(historydata));
-    myFunction()
+    
   }, [numberofdraw])
 
   useEffect(() => {
@@ -97,6 +98,7 @@ var sizearr = ["large" , "small"] ;
   const numberClicked = (e) => {
     e.preventDefault();
     setnumberclick(e.target.value);
+    settimeatclick(time) ; 
     if(e.target.value %2==0){
       settype("even"); 
     }
@@ -127,10 +129,13 @@ var sizearr = ["large" , "small"] ;
       alert(coinsnumberofcoin);
     }
     else{
-      totalcoins=totalcoins-coins; 
-      setotalcoins(totalcoins);
-      dispatch(totalcoinsdata({totalcoins,userid})) ;
-      alert(`oops! wrong answer`);
+      console.log()  ;
+      setTimeout(() => {
+        totalcoins=totalcoins-coins; 
+        setotalcoins(totalcoins);
+        dispatch(totalcoinsdata({totalcoins,userid}));
+        alert(`oops! wrong answer`);
+      } ,  `${timeatclick}000`-10000);
     }
     }
     else{
@@ -138,9 +143,6 @@ var sizearr = ["large" , "small"] ;
     }
 
   }
-
-
-
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row" }}>

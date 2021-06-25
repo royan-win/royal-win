@@ -8,7 +8,8 @@ function ColorWin() {
     const dispatch = useDispatch(); 
     const user = JSON.parse(localStorage.getItem("profile"));
     var userid = user?.result?._id; 
-    var [coins, setcoins] = useState(""); 
+    var [coins, setcoins] = useState("");
+    const [timeatclick , settimeatclick] = useState(null) ;  
     var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
   var [drawhis , setdrwahis] = useState([]) ; 
   var dicehistory = useSelector(state => state.History) ; 
@@ -92,6 +93,7 @@ const numberClicked = (e)=>{
    e.preventDefault();
    setnumberclick(e.target.value);
    console.log(numberclick);
+   settimeatclick(time);
 
 }
 
@@ -114,13 +116,16 @@ const coinbuyed = (e) => {
     alert(coinsnumberofcoin);
   }
   else{
-    totalcoins=totalcoins-coins; 
-    setotalcoins(totalcoins);
-    dispatch(totalcoinsdata({totalcoins,userid})) ;
-    alert(`oops! wrong answer`);
+    setTimeout(() => {
+      totalcoins=totalcoins-coins; 
+      setotalcoins(totalcoins);
+      dispatch(totalcoinsdata({totalcoins,userid}));
+      alert(`oops! wrong answer`);
+    } , `${timeatclick}1000` - 10000);
   }
 }
 else{
+ 
   alert("please login") ; 
 }
 }

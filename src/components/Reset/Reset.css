@@ -1,0 +1,22 @@
+.reset_password{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reset_password input{
+    width:300px; 
+    height:40px;
+    margin:20px;  
+}
+
+.reset_password button{
+    margin:10px;
+    width:170px;
+    height:30px;
+    background-color: rgb(245, 245, 245); 
+    border: none;
+    box-shadow: 1px 1px 1px black;
+}

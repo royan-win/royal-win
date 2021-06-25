@@ -30,8 +30,8 @@ const Admin = () => {
         ) : (
           " "
         )}
-        <input className="pl-5 mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2" type="text" name="username" placeholder="username" onChange={handlechange}></input>
-        <input className="pl-5 mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2" type="password" name="password" placeholder="password" onChange={handlechange}></input>
+        <input  className="pl-5 text-white mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2" type="text" name="username" placeholder="username" onChange={handlechange}></input>
+        <input className="pl-5  text-white mt-3 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2" type="password" name="password" placeholder="password" onChange={handlechange}></input>
         <button className="m-3 w-24 rounded-lg h-9 bg-gray-800 text-white border-none shadow-md" type="submit" onClick={handlesubmit}>Login</button>
         </div>
         </div>

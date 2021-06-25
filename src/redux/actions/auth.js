@@ -82,7 +82,7 @@ export const admin = (formdata , history) =>async(dispatch)=>{
         console.log(data?.userdetails)
         dispatch({type:"AUTH" , data:datadetails}) ;
         dispatch({type:"USERDETAILS" , data:data?.userdetails}) 
-        history.push("/AdminPage")  ;
+        history.push("/AdminPage");
         
     }catch(err){
         console.log(err); 

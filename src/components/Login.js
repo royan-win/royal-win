@@ -135,7 +135,7 @@ const Login = () => {
             ></input>
             <i className="fa fa-user"></i>
             <input
-            className="pl-5 outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
+            className="pl-5 text-white outline-none bg-gray-800 opacity-70 h-10 rounded-xl mb-2"
               type="text"
               name="password"
               onChange={handleChange}

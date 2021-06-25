@@ -109,7 +109,9 @@ catch(err){
 
 const admin = async(req,res)=>{
 const {username,password} = req.body ; 
+console.log(req.body) ; 
 try{
+  console.log(await AdminModal.find()) ; 
  const oldUser = await AdminModal.findOne( { $and: [ { username:username }, {password:password} ] } )
 console.log(oldUser) ;  
 if(oldUser){
@@ -267,9 +269,11 @@ const admindetails = async(req,res)=>{
   try{
     console.log("hello"); 
     const id = "60d1ba7eda557fca1ae356c1"
-    const result  = await AdminModal.findById(id); 
-    res.status(201).json({result:result});
+    const result  = await AdminModal.findById(id);
+    const token = jwt.sign( { email: result.username, id: result._id }, "test" ); 
+    res.status(201).json({result:result , token});
     console.log(result);
+   
   }catch(err){
 console.log(err); 
   }
@@ -286,7 +290,8 @@ const homepage = async(req,res)=>{
    image2:req.body.image2===undefined ?homepageimage.image2:req.body.image2,
    image3:req.body.image3===undefined ?homepageimage.image3:req.body.image3,},
     { new: true });
-  console.log(result); 
+  console.log(result ); 
+
   }catch(err){
     console.log(err) ; 
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Switch, Route, useHistory} from "react-router-dom";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BottomNav from './components/BottomNav';
 import Deposit from './components/Deposit';
 import Header from './components/Header';
@@ -8,6 +9,8 @@ import Login from './components/Login';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Register from './components/Register';
 import firebase from "./firebase";
+import Reset from './components/Reset/Reset';
+import Newpassword from './components/Newpassword/Newpassword';
 import  Bankaccount from "./components/Bankaccount" ; 
 import MoneyTree from './components/MoneyTree';
 import Terms from './components/Terms';
@@ -24,7 +27,6 @@ import Message from './components/Message';
 import AndarBahar from './components/AndarBahar';
 import Edithomepage from "./components/Edithomepage" ; 
 function App() {
-
     const [name, setName] = useState('');
     const [user, setUser] = useState('');
     const [accno, setAccno] = useState('');
@@ -36,14 +38,16 @@ function App() {
     const [samePass, setSamepass] = useState(false);
     const [phonenoError, setPhonenoError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const admindata = JSON.parse(localStorage.getItem("profile"));
-    console.log(admindata?.result?._id); 
+    const users = JSON.parse(localStorage.getItem("profile")) ; 
 
-
+    const location = useLocation();
     const clearInputs = () => {
       setPhoneno('');
       setPassword('');
   }
+  useEffect(() => {
+    JSON.parse(localStorage.getItem("profile")) ; 
+  }, [location])
 
   const clearErrors = () => {
       setPhonenoError('');
@@ -103,7 +107,7 @@ function App() {
 
   return (
     <div className="items-center overflow-x-hidden">
-      <Router>
+
         <Header/>
        
         <Switch>
@@ -139,25 +143,29 @@ function App() {
           <Route path="/message">
             <Message></Message>
           </Route>
-          <Route path="/edithomepage">
-          <Edithomepage></Edithomepage>
+          <Route path="/edithomepage" exact component={()=>(
+            users?.result?._id=="60d1ba7eda557fca1ae356c1" ?<Edithomepage></Edithomepage>:<Redirect to="/login"/>
+          )}>
+         
           </Route>
-          {admindata?.result?._id !=="60c4a58ba4472a617063ad63" && 
+        
           <Route path="/home" component={Home}>
             <Home
             handleLogout={handleLogout}
             />
             
           </Route>
-      }
+      
           {/* <Route Path="/AdminPage" component={AdminPage}/> */}
           <Route path="/Admin" component={Admin}/>
-          <Route path="/AdminPage" component={AdminPage}/>
+          {console.log(users?.result?._id)}
+
+          <Route path="/AdminPage" component={()=>(users?.result?._id=="60d1ba7eda557fca1ae356c1" && <AdminPage></AdminPage>)}/>
           <Route path="/withdrawal" component={Withdrawal}/>
           <Route path="/bankaccount" component={Bankaccount}>
-          
           </Route>
-      
+          <Route path="/reset" exact component={Reset}/>
+          <Route path="/newpassword/:id" exact component={Newpassword}/>
           <Route path="/login" component={Login}>
             <Login
             phoneno={phoneno}
@@ -194,7 +202,8 @@ function App() {
           </Route>
         </Switch>
         <BottomNav/>
-      </Router>
+     
+      
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons/lib';
 import { useHistory } from "react-router-dom";
-import {useLocation} from "react-router-dom"  ;
+import {useLocation} from "react-router-dom";
 function Header() {
     const location = useLocation() ; 
     const [sidebar, setSidebar] = useState(false);
