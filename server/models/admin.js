@@ -6,6 +6,7 @@ withdrwal :{
     coins_withdrwal:{type:String},
     withdrwal:{type:String} , 
     withdrwal_on:{type:Date},
+    withdrawer_id:{type:String}, 
     default:{}, 
 }, 
 deposit :{

@@ -1,4 +1,4 @@
-import React , {useState,useEffect} from 'react'
+import React , {useState, useEffect } from 'react'
 import { adminDeposit } from '../redux/actions/auth';
 import axios from "axios" ; 
 import {useDispatch} from "react-redux" ; 

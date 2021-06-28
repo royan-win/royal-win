@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/actions/MoneyTree';
 import {totalcoinsdata} from "../redux/actions/auth"
-import {useHistory} from "react-router-dom"; 
+
 function ColorWin() {
     
     const dispatch = useDispatch(); 
@@ -11,7 +11,6 @@ function ColorWin() {
     var [coins, setcoins] = useState("");
     const [timeatclick , settimeatclick] = useState(null) ;  
     var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
-  var [drawhis , setdrwahis] = useState([]) ; 
   var dicehistory = useSelector(state => state.History) ; 
 var [value, setvalue] = useState([]) 
 
@@ -27,18 +26,6 @@ var [value, setvalue] = useState([])
       Math.floor(Math.random())
   );
 
- const [data , setdata] = useState({
-    0:"" ,
-    1:"" ,
-    2:"" ,  
-   3:"" ,
-   4:"" ,
-   5:"" ,
-   6:"" ,
-   7:"" ,
-   8:"" ,
-   9:"" 
- })
   var timeref;
   let[numberofdraw , setnumberofdraw]  =useState(0) ; 
   var [numberclick, setnumberclick] = useState();

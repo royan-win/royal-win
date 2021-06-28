@@ -165,6 +165,22 @@ export const adminDepositDecline = (formdata) =>async(dispatch)=>{
         console.log(err)
     }
 }
+export const allowadminwithdrwal = (formdata) =>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+        const {data} = api.allowadminwithdrwal(formdata) ; 
+    }catch(err){
+        console.log(err);
+    }
+}
+export const declineadminwithdrwal = (formdata) =>async(dispatch)=>{
+    console.log(formdata) ; 
+    try{
+        const {data} = api.declineadminwithdrwal(formdata) ; 
+    }catch(err){
+        console.log(err);
+    }
+}
 export const admindetails = ()=>async(dispatch)=>{
     try{
         const {data} = await api.admindetails() ;

@@ -113,7 +113,7 @@ console.log(req.body) ;
 try{
   console.log(await AdminModal.find()) ; 
  const oldUser = await AdminModal.findOne( { $and: [ { username:username }, {password:password} ] } )
-console.log(oldUser) ;  
+
 if(oldUser){
 var userdetails = await UserModal.find(); 
 }
@@ -173,6 +173,7 @@ try{
   const withdrawtdata = {
     coins_withdrwal:req.body.withdrwal,
     withdrwal:req.body.name,
+    withdrawer_id:req.body.id, 
     withdrwal_on:new Date().toISOString()
   };
    const withdrawcoins = await AdminModal.findByIdAndUpdate(
@@ -233,7 +234,7 @@ const adminDepositDecline = async(req,res)=>{
   const {id} = req.body  ;
   const _id = "60d1ba7eda557fca1ae356c1"
 try{
-  const olduser = UserModal.findById(id);
+
    console.log(id)
   const pullingout=await AdminModal.findByIdAndUpdate(
     _id,
@@ -253,17 +254,75 @@ try{
   const olduser = await UserModal.findById(id);
   olduser.coins = olduser.coins+totalcoins; 
   await olduser.save();
+  const depositdata = {
+    coins_deposit: req.body.deposit,
+    name: req.body.name,
+    deposited_on:new Date().toISOString()
+  }
   const pullingout=await AdminModal.findByIdAndUpdate(
     _id,
   { $pull: {deposit:{depositer_id:id}}},
   { new: true }
   )
   console.log(pullingout);
-
+  const depositedcoins = await UserModal.findByIdAndUpdate(
+    id,
+    { $push: { deposit:depositdata} },
+    { new: true }
+  );
+  console.log(depositedcoins) ; 
 }catch(err){
   console.log(err) ; 
 }
 }
+
+const allowadminwithdrwal  =async(req,res)=>{
+  console.log(req.body) ; 
+const id= req.body.withdrawer_id; 
+  const _id = "60d1ba7eda557fca1ae356c1"; 
+try{
+  const withdrwaldata = {
+    coins_withdrwal: req.body.coins,
+    withdrwal_on:new Date().toISOString()
+  }
+   const olduser = await UserModal.findById(id);  
+   var coinsint = parseInt(req.body.coins);  
+   olduser.coins = olduser.coins+coinsint;
+   const pullingout=await AdminModal.findByIdAndUpdate(
+    _id,  
+  { $pull: {withdrwal:{withdrawer_id:id}}},
+  { new: true }
+  )
+  const withdrwalcoins = await UserModal.findByIdAndUpdate(
+    id,
+    { $push: {withdrwal:withdrwaldata}},
+    { new:true} 
+  );
+console.log(withdrwalcoins)  ; 
+console.log(pullingout);
+  await olduser.save() ; 
+}
+catch(err){
+  console.log(err); 
+}
+}
+const declineadminwithdrwal  =async(req,res)=>{
+  console.log(req.body) ; 
+  const id= req.body.withdrawer_id; 
+  const _id = "60d1ba7eda557fca1ae356c1"
+try{
+ const pullingout=await AdminModal.findByIdAndUpdate(
+   _id,
+ { $pull: {withdrwal:{withdrawer_id:id}}},
+ { new: true }
+ )
+ console.log(pullingout); 
+}
+catch(err){
+  console.log(err); 
+}
+}
+
 const admindetails = async(req,res)=>{
   console.log("hello"); 
   try{
@@ -272,7 +331,7 @@ const admindetails = async(req,res)=>{
     const result  = await AdminModal.findById(id);
     const token = jwt.sign( { email: result.username, id: result._id }, "test" ); 
     res.status(201).json({result:result , token});
-    console.log(result);
+   
    
   }catch(err){
 console.log(err); 
@@ -283,14 +342,14 @@ const homepage = async(req,res)=>{
   console.log(req.body) 
   const id= "60d1bb76da557fca1ae356c2"
   try{
-    console.log(req.body.image1, req.body.image2 , req.body.image3)
+  console.log(req.body.image1, req.body.image2 , req.body.image3)
   const homepageimage = await HomePageModal.findOne() ;  
- const result =  await HomePageModal.findByIdAndUpdate(id,{  
-   image1:req.body.image1===undefined ?homepageimage.image1:req.body.image1,
-   image2:req.body.image2===undefined ?homepageimage.image2:req.body.image2,
-   image3:req.body.image3===undefined ?homepageimage.image3:req.body.image3,},
-    { new: true });
-  console.log(result ); 
+  const result =  await HomePageModal.findByIdAndUpdate(id,{  
+  image1:req.body.image1===undefined ?homepageimage.image1:req.body.image1,
+  image2:req.body.image2===undefined ?homepageimage.image2:req.body.image2,
+  image3:req.body.image3===undefined ?homepageimage.image3:req.body.image3,},
+    {new: true});
+  console.log(result); 
 
   }catch(err){
     console.log(err) ; 
@@ -307,4 +366,4 @@ const gethomepageimage = async(req,res)=>{
   }
 }
 module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails, adminDeposit , adminDepositAllow ,  adminDepositDecline , admindetails ,homepage , 
-  gethomepageimage} ; 
+  gethomepageimage , allowadminwithdrwal ,declineadminwithdrwal} ; 

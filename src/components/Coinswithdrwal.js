@@ -25,7 +25,7 @@ const Coinswithdrwal = () => {
         const balance = totalcoins-changecoins; 
         dispatch(adminwithdrwal({withdrwal:changecoins , id:userid , name:user?.result?.Real_name  }));
     }
-    return (
+    return(
         <div className=" flex justify-center bg-back-img">
             <h1 className="ml-36 pt-10 text-yellow-400 font-semibold text-xl">Messages</h1>
             <div className="inline-block mb-32 mt-5">
