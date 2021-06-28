@@ -324,9 +324,8 @@ catch(err){
 }
 
 const admindetails = async(req,res)=>{
-  console.log("hello"); 
+
   try{
-    console.log("hello"); 
     const id = "60d1ba7eda557fca1ae356c1"
     const result  = await AdminModal.findById(id);
     const token = jwt.sign( { email: result.username, id: result._id }, "test" ); 
