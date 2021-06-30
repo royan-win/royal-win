@@ -252,13 +252,16 @@ const adminDepositAllow = async(req,res)=>{
   const _id = "60d1ba7eda557fca1ae356c1"
 try{
   const olduser = await UserModal.findById(id);
-  olduser.coins = olduser.coins+totalcoins; 
+  olduser.coins = olduser.coins+totalcoins;
+  olduser.deposit_count = olduser.deposit_count+1 ;
+  console.log(olduser.deposit_count) ;    
   await olduser.save();
   const depositdata = {
     coins_deposit: req.body.deposit,
     name: req.body.name,
     deposited_on:new Date().toISOString()
   }
+
   const pullingout=await AdminModal.findByIdAndUpdate(
     _id,
   { $pull: {deposit:{depositer_id:id}}},
@@ -270,7 +273,7 @@ try{
     { $push: { deposit:depositdata} },
     { new: true }
   );
-  console.log(depositedcoins) ; 
+  
 }catch(err){
   console.log(err) ; 
 }

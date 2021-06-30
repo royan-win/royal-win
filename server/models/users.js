@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
   coins:
   {type:Number,
   default:0},
+  deposit_count:{type:Number ,required:true,default:0}, 
   password: { type: String, required: true },
   id: {type: String }, 
   deposit :{
