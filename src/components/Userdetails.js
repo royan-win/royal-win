@@ -14,11 +14,9 @@ const Userdetails = () => {
                            <AgGridColumn field="email" sortable={ true }></AgGridColumn>
                            <AgGridColumn field="bank_acc" sortable={ true }></AgGridColumn>
                            <AgGridColumn field="ifsc" sortable={ true }></AgGridColumn>
-                           <AgGridColumn field="coins" sortable={ true }></AgGridColumn>
+                           <AgGridColumn field="coins" sortable={ true }></AgGridColumn>    
                        </AgGridReact>
                    </div>
-                
-    )
+                    )
 }
-
 export default Userdetails

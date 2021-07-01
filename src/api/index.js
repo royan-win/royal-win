@@ -24,3 +24,4 @@ export const declineadminwithdrwal = (formdata)=>API.post("/users/declineadminwi
 export const admindetails = ()=> API.get("/users/admindetails") ;
 export const homepage = (formdata)=> API.post("/users/homepage" , (formdata));  
 export const gethomepageimage  = () =>API.get("/users/gethomepageimage");
+export const editcoins = (formdata) =>API.patch("/users/editcoins",(formdata));

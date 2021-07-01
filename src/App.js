@@ -26,6 +26,7 @@ import Coinswithdrwal from './components/Coinswithdrwal';
 import Message from './components/Message';
 import AndarBahar from './components/AndarBahar';
 import Edithomepage from "./components/Edithomepage" ; 
+import Editcoins from "./components/Editcoins" ; 
 function App() {
     const [name, setName] = useState('');
     const [user, setUser] = useState('');
@@ -142,6 +143,9 @@ function App() {
           </Route>
           <Route path="/message">
             <Message></Message>
+          </Route>
+          <Route path="/editcoins">
+          <Editcoins></Editcoins>
           </Route>
           <Route path="/edithomepage" exact component={()=>(
             users?.result?._id=="60d1ba7eda557fca1ae356c1" ?<Edithomepage></Edithomepage>:<Redirect to="/login"/>

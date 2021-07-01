@@ -252,9 +252,20 @@ const adminDepositAllow = async(req,res)=>{
   const _id = "60d1ba7eda557fca1ae356c1"
 try{
   const olduser = await UserModal.findById(id);
-  olduser.coins = olduser.coins+totalcoins;
+  
   olduser.deposit_count = olduser.deposit_count+1 ;
-  console.log(olduser.deposit_count) ;    
+  console.log(olduser.deposit_count) ; 
+  if(olduser.deposit_count==0){
+    olduser.coins = (10/100) * totalcoins ; 
+    olduser.coins = olduser.coins+totalcoins;
+  }
+  else if(olduser.deposit_count==1){
+    olduser.coins = olduser.coins+totalcoins;
+    olduser.coins = (20/100) * totalcoins ; 
+  }
+  else{
+    olduser.coins = olduser.coins+totalcoins;
+  }   
   await olduser.save();
   const depositdata = {
     coins_deposit: req.body.deposit,
@@ -270,6 +281,7 @@ try{
   console.log(pullingout);
   const depositedcoins = await UserModal.findByIdAndUpdate(
     id,
+    
     { $push: { deposit:depositdata} },
     { new: true }
   );
@@ -367,5 +379,22 @@ const gethomepageimage = async(req,res)=>{
     console.log(err); 
   }
 }
+const editcoins  = async(req,res)=>{
+  console.log(req.body); 
+  try{
+    var coinsint = parseInt(req.body.coins); 
+    const coins = {coins:coinsint}
+    const Real_name = {Real_name:req.body.username}
+    console.log(coins, Real_name) ; 
+    const oldUser = await UserModal.findOneAndUpdate(Real_name , coins , {
+      new:true
+    }); 
+
+     console.log(oldUser); 
+  }catch(err){
+    console.log(err); 
+  }
+}
+
 module.exports ={signin , signup , reset ,newpassword , admin , totalcoins , deposit , adminwithdrwal , userdetails, adminDeposit , adminDepositAllow ,  adminDepositDecline , admindetails ,homepage , 
-  gethomepageimage , allowadminwithdrwal ,declineadminwithdrwal} ; 
+  gethomepageimage , allowadminwithdrwal ,declineadminwithdrwal , editcoins} ; 

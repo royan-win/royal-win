@@ -209,3 +209,11 @@ export const gethomepageimage = ()=>async(dispatch)=>{
         console.log(err) ; 
     }
 }
+export const editcoins = (formdata)=>async(dispatch)=>{
+    console.log(formdata)
+    try{
+const {data} = await api.editcoins(formdata); 
+    }catch(err){
+        console.log(err) ; 
+    }
+}

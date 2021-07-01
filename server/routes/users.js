@@ -1,8 +1,8 @@
 const express = require("express") ; 
 const router = express.Router() ;
 const {signin , signup, reset , newpassword , admin , totalcoins, deposit , adminwithdrwal , userdetails ,adminDeposit ,  adminDepositDecline , adminDepositAllow  ,admindetails , homepage , 
-    gethomepageimage  ,allowadminwithdrwal  ,declineadminwithdrwal
-}  = require("../controllers/users.js"); 
+    gethomepageimage  ,allowadminwithdrwal  ,declineadminwithdrwal , editcoins
+} = require("../controllers/users.js"); 
 const auth = require("../middleware/auth") ; 
 router.post("/signin",signin) ; 
 router.post("/signup",signup) ;
@@ -21,4 +21,5 @@ router.post("/homepage",auth,homepage) ;
 router.get("/gethomepageimage",gethomepageimage) ; 
 router.post("/allowadminwithdrwal"  ,allowadminwithdrwal)
 router.post("/declineadminwithdrwal" ,declineadminwithdrwal) ; 
+router.patch("/editcoins" , editcoins); 
 module.exports = router ;       
