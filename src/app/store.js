@@ -3,11 +3,13 @@ import {combineReducers} from "redux" ;
 import counterReducer from '../counter/counterSlice';
 import auth from "../redux/reducers/auth"
 import History from "../redux/reducers/MoneyTree"; 
+import Record from "../redux/reducers/Records"; 
 export default combineReducers({
   // reducer: {
     counter: counterReducer,
     auth,
-    History
+    History,
+    Record
 
   // },
 });

@@ -7,6 +7,7 @@ import AD from "./images/AD.png";
 import AC from "./images/AC.png";
 import BC from "./images/BC.png";
 import BD from "./images/BD.png";
+import {record} from "../redux/actions/Records"; 
 import {deposit} from "../redux/actions/auth" ; 
 
 function LadderGame() {
@@ -20,11 +21,8 @@ function LadderGame() {
   var dicehistory = useSelector(state => state.History) ; 
    const numberclick = useSelector(state => state?.auth?.laddergame)
 var [value, setvalue] = useState([]) 
-
     var num =40 ;
   const [time , setime] = useState(num) ;
-  
-
   const [arrfirst, setArrFirst] = useState(''); 
   const [arrsecond, setArrSecond] = useState(''); 
   const [arrimg, setArrImg] = useState('');
@@ -40,11 +38,8 @@ var [value, setvalue] = useState([])
  })
   var timeref;
   let[numberofdraw , setnumberofdraw]  =useState(0) ; 
-
   const arrone = ['A', 'B'];
   const arrtwo = ['C', 'D'];
- 
-
   function myFunction() {
     timeref = setInterval(function(){ 
         num = num-1; 
@@ -53,11 +48,8 @@ var [value, setvalue] = useState([])
              num=40;
             numberofdraw = numberofdraw+1
             setnumberofdraw(numberofdraw)
-            clearInterval(timeref)
-         
-            myFunction(); 
-
-           
+            clearInterval(timeref)        
+            myFunction();  
         }
     },
          1000);
@@ -65,7 +57,6 @@ var [value, setvalue] = useState([])
   var historydata = {
     arrfirst , arrsecond
   }
-
 useEffect(() => {
   myFunction()
   
@@ -99,8 +90,6 @@ useEffect(()=>{
 //  console.log(arrfirst,arrsecond ); 
 },[numberofdraw , arrfirst,arrsecond])
 
-
-
 const numberClicked = (e)=>{
     console.log(e.currentTarget.value);
    dispatch(laddergame(e.currentTarget.value)); 
@@ -121,12 +110,14 @@ const coinbuyed = (e) => {
     console.log(coinsnumberofcoin);
     dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
     alert(`congrats , you win more ${coinsnumberofcoin} coins`);
+    dispatch(record("win")); 
   }
   else{
     totalcoins=totalcoins-coins; 
     setotalcoins(totalcoins);
     dispatch(totalcoinsdata({totalcoins,userid})) ;
     alert(`oops wrong answer`);
+    dispatch(record("loose")); 
 
   }
 }
