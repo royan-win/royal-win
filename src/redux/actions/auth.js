@@ -213,7 +213,11 @@ export const editcoins = (formdata)=>async(dispatch)=>{
     console.log(formdata)
     try{
 const {data} = await api.editcoins(formdata); 
+console.log(data); 
     }catch(err){
         console.log(err) ; 
+        const error_message=(err.response.data.message); 
+        console.log(error_message) ; 
+        dispatch({type:"ERROR" , payload : error_message}) ;
     }
 }

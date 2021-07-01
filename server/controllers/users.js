@@ -388,11 +388,14 @@ const editcoins  = async(req,res)=>{
     console.log(coins, Real_name) ; 
     const oldUser = await UserModal.findOneAndUpdate(Real_name , coins , {
       new:true
-    }); 
-
-     console.log(oldUser); 
+    });
+    if(oldUser==null){
+      res.status(500).json({ message: "invalid name" });
+    }
   }catch(err){
-    console.log(err); 
+  console.log(err); 
+  res.status(500).json({ message: "invalid name" });
+
   }
 }
 
