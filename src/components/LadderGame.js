@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { laddergame } from '../redux/actions/auth';
-import { history } from '../redux/actions/MoneyTree';
+import { ladderhistory } from '../redux/actions/history';
 import {totalcoinsdata} from "../redux/actions/auth"
 import AD from "./images/AD.png";
 import AC from "./images/AC.png";
 import BC from "./images/BC.png";
 import BD from "./images/BD.png";
-import {record} from "../redux/actions/Records"; 
+import {ladder_record} from "../redux/actions/Records"; 
 import {deposit} from "../redux/actions/auth" ; 
 
 function LadderGame() {
@@ -16,16 +17,23 @@ function LadderGame() {
     var[totalcoins ,setotalcoins] = useState(0) ; 
     var [coins, setcoins] = useState(""); 
     const user = JSON.parse(localStorage.getItem("profile"));
+    let records = JSON.parse(localStorage.getItem("ladder record")) ;
+    let dicehistory =   JSON.parse(localStorage.getItem("ladder history")) ;
     var userid = user?.result?._id; 
+   let [historydata , sethistorydata] = useState([]); 
     var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
-  var dicehistory = useSelector(state => state.History) ; 
+  // var dicehistory = useSelector(state => state.History) ; 
+  var lengthhistory = dicehistory?.length ; 
+
+   const location = useLocation() ; 
    const numberclick = useSelector(state => state?.auth?.laddergame)
-var [value, setvalue] = useState([]) 
+var [value, setvalue] = useState([]); 
     var num =40 ;
   const [time , setime] = useState(num) ;
   const [arrfirst, setArrFirst] = useState(''); 
   const [arrsecond, setArrSecond] = useState(''); 
   const [arrimg, setArrImg] = useState('');
+
  const [data , setdata] = useState({
    A:"" ,
    B:"" ,
@@ -52,9 +60,9 @@ var [value, setvalue] = useState([])
             myFunction();  
         }
     },
-         1000);
+    1000);
   }
-  var historydata = {
+  var historydatas = {
     arrfirst , arrsecond
   }
 useEffect(() => {
@@ -63,17 +71,32 @@ useEffect(() => {
 }, [numberofdraw])
 
 useEffect(() => {
-  let lastElement1 = dicehistory[dicehistory.length - 5]
-  let lastElement2 = dicehistory[dicehistory.length - 4]
-  let lastElement3 = dicehistory[dicehistory.length - 3];
-  let lastElement4 = dicehistory[dicehistory.length - 2];
-  let lastElement5 = dicehistory[dicehistory.length - 1];
-  var val=[lastElement5,lastElement4,lastElement3, lastElement2,lastElement1]
+console.log(dicehistory.length) ;
+ 
+}, [location]); 
 
-setvalue(val) ; 
-console.log(value)  ;
-dispatch(history(historydata));
-}, [numberofdraw])
+useEffect(() => {
+ console.log(dicehistory.historydata.length);
+ 
+    let lastElement1 = dicehistory.historydata[dicehistory.historydata.length - 4];
+    let lastElement2 = dicehistory.historydata[dicehistory.historydata.length - 3];
+    let lastElement3 = dicehistory.historydata[dicehistory.historydata.length - 2];
+    let lastElement4 = dicehistory.historydata[dicehistory.historydata.length - 1];
+    let lastElement5 = dicehistory.historydata[dicehistory.historydata.length - 0];
+    var val=[lastElement5,lastElement4,lastElement3, lastElement2,lastElement1];
+    console.log(val); 
+  setvalue(val) ; 
+  console.log(historydatas); 
+  var qwe=historydata.push({historydatas})
+  sethistorydata(qwe); 
+  console.log(value);
+}, [numberofdraw]); 
+
+useEffect(()=>{
+  localStorage.setItem('ladder history' , JSON.stringify({historydata})) ; 
+dispatch(ladderhistory(historydata));
+
+},[numberofdraw])
 
 useEffect(()=>{
   setArrFirst(arrone[Math.floor(Math.random() * arrone.length)]);
@@ -87,12 +110,14 @@ useEffect(()=>{
   } else if(arrfirst === "B" && arrsecond === "C"){
     setArrImg(BC);
   } 
+
 //  console.log(arrfirst,arrsecond ); 
 },[numberofdraw , arrfirst,arrsecond])
 
 const numberClicked = (e)=>{
     console.log(e.currentTarget.value);
    dispatch(laddergame(e.currentTarget.value)); 
+   
 }
 
  
@@ -101,8 +126,17 @@ const coinbuyed = (e) => {
   console.log("hello");
   console.log(numberclick);
   if(userid){
-  if (numberclick == `${arrfirst}${arrsecond}` ||numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`){  
-    var coinsnumberofcoin = coins * 1.9;
+  if (numberclick == `${arrfirst}`|| numberclick == `${arrsecond}` || numberclick == `${arrfirst}${arrsecond}`){
+    var coinsnumberofcoin ; 
+    if(numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`) {
+       coinsnumberofcoin = coins * 1.9;
+       console.log(coinsnumberofcoin) 
+    } 
+    if(numberclick == `${arrfirst}${arrsecond}`){
+       coinsnumberofcoin = coins * 3.6;
+       console.log(coinsnumberofcoin); 
+    }
+    
     totalcoins=coinsnumberofcoin+totalcoins
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
@@ -110,14 +144,14 @@ const coinbuyed = (e) => {
     console.log(coinsnumberofcoin);
     dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
     alert(`congrats , you win more ${coinsnumberofcoin} coins`);
-    dispatch(record("win")); 
+    dispatch(ladder_record("win")); 
   }
   else{
     totalcoins=totalcoins-coins; 
     setotalcoins(totalcoins);
     dispatch(totalcoinsdata({totalcoins,userid})) ;
     alert(`oops wrong answer`);
-    dispatch(record("loose")); 
+    dispatch(ladder_record("loose")); 
 
   }
 }
@@ -264,4 +298,4 @@ else{
 </>
     )    
 }
-export default LadderGame
+export default LadderGame 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { history } from '../redux/actions/MoneyTree';
+import { moneytreehistory } from '../redux/actions/history';
 import {totalcoinsdata} from "../redux/actions/auth"
 const MoneyTree = () => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ var sizearr = ["large" , "small"] ;
  }, [numberofdraw]);
 
   useEffect(() => {
-    dispatch(history(historydata));
+    dispatch(moneytreehistory(historydata));
     
   }, [numberofdraw])
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../redux/actions/MoneyTree';
+import { colorwinhistory} from '../redux/actions/history';
 import {totalcoinsdata} from "../redux/actions/auth"
 
 function ColorWin() {
@@ -66,7 +66,7 @@ useEffect(() => {
   let lastElement4 = dicehistory[dicehistory.length - 2];
   let lastElement5 = dicehistory[dicehistory.length - 1];
   var val=[lastElement5,lastElement4,lastElement3, lastElement2,lastElement1]
-  dispatch(history(historydata));
+  dispatch(colorwinhistory(historydata));
 setvalue(val) ; 
 
 }, [numberofdraw])

@@ -1,13 +1,14 @@
-const Moneytree = (record=[] , action)=>{
+const records = (state={ladderrecord:[]} , action)=>{
     switch(action.type){
-        case "RECORD":
-            return [
-             ...record ,  action.payload
-            ];
+        case "LADDERRECORD":
+            localStorage.setItem('ladder record' , JSON.stringify({ ...state.ladderrecord ,ladderrecord:[...state.ladderrecord  ,action.payload]})) ; 
+            return {
+             ...state.ladderrecord ,ladderrecord:[...state.ladderrecord  ,action.payload]
+            };
+
+            
             default:
-                return record
-
+                return state
     }
-}  
-
-export default Moneytree ; 
+} 
+export default records; 
