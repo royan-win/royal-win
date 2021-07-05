@@ -11,6 +11,7 @@ const MoneyTree = () => {
   var [coins, setcoins] = useState("");
   const [timeatclick , settimeatclick] = useState(null) ;  
   var[totalcoins ,setotalcoins] = useState(user?.result?.coins) ; 
+  var[coinsmultiplied , setcoinsmultiplied] = useState(1); 
   var num = 40;
   const [time, setime] = useState(num);
   const [rollSum, setrollsum] = useState(13);
@@ -21,22 +22,22 @@ const MoneyTree = () => {
   var [size , setsize] = useState(""); 
 var [type , settype] = useState("");
   const [data, setdata] = useState({
-    3: "",
-    4: "",
-    5: "",
-    6: "",
-    7: "",
-    8: "",
-    9: "",
-    10:"",
-    11: "",
-    12: "",
-    13: "",
-    14: "",
-    15: "",
-    16: "",
-    17: "",
-    18: "",
+    3: 12,
+    4: 13,
+    5: 65,
+    6: 13,
+    7: 86,
+    8: 35,
+    9: 4,
+    10:85,
+    11: 23,
+    12: 23,
+    13: 28,
+    14: 54,
+    15: 34,
+    16: 76,
+    17: 34,
+    18: 34,
   })
   var [numberclick, setnumberclick] = useState();
   var timeref;
@@ -97,8 +98,16 @@ var sizearr = ["large" , "small"] ;
 
   const numberClicked = (e) => {
     e.preventDefault();
+    const numval  =parseInt(e.target.value); 
+    console.log(numval);  
+    
     setnumberclick(e.target.value);
     settimeatclick(time) ; 
+    
+   
+    console.log(Object.values(data)); 
+  var coinsmult = (data[Object.keys(data)[numval-3]]);
+  setcoinsmultiplied(coinsmult);  
     if(e.target.value %2==0){
       settype("even"); 
     }
@@ -118,7 +127,7 @@ var sizearr = ["large" , "small"] ;
     console.log(numberclick);
     if(userid){
     if (numberclick == rollSum ||numberclick == size || numberclick == type ) {  
-      var coinsnumberofcoin = coins * 1.9;
+      var coinsnumberofcoin = coins * coinsmultiplied;
       console.log(totalcoins); 
       totalcoins=coinsnumberofcoin+totalcoins
       console.log(totalcoins); 

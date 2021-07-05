@@ -14,6 +14,7 @@ import {deposit} from "../redux/actions/auth" ;
 function LadderGame() {
     const dispatch = useDispatch(); 
     // var [numberclick, setnumberclick] = useState(0);
+    var[countclicked , setcountclicked] = useState(1); 
     var[totalcoins ,setotalcoins] = useState(0) ; 
     var [coins, setcoins] = useState(""); 
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -87,8 +88,8 @@ useEffect(() => {
     console.log(val); 
   setvalue(val) ; 
   console.log(historydatas); 
-  var qwe=historydata.push({historydatas})
-  sethistorydata(qwe); 
+ 
+ 
   console.log(value);
 }, [numberofdraw]); 
 
@@ -110,7 +111,7 @@ useEffect(()=>{
   } else if(arrfirst === "B" && arrsecond === "C"){
     setArrImg(BC);
   } 
-
+setcountclicked(1); 
 //  console.log(arrfirst,arrsecond ); 
 },[numberofdraw , arrfirst,arrsecond])
 
@@ -124,11 +125,13 @@ const numberClicked = (e)=>{
 const coinbuyed = (e) => {
   e.preventDefault();
   console.log("hello");
-  console.log(numberclick);
+  setcountclicked(0); 
+  console.log(countclicked);
   if(userid){
+    if(countclicked){
   if (numberclick == `${arrfirst}`|| numberclick == `${arrsecond}` || numberclick == `${arrfirst}${arrsecond}`){
     var coinsnumberofcoin ; 
-    if(numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`) {
+    if(numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`) {  
        coinsnumberofcoin = coins * 1.9;
        console.log(coinsnumberofcoin) 
     } 
@@ -136,7 +139,6 @@ const coinbuyed = (e) => {
        coinsnumberofcoin = coins * 3.6;
        console.log(coinsnumberofcoin); 
     }
-    
     totalcoins=coinsnumberofcoin+totalcoins
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
@@ -144,8 +146,8 @@ const coinbuyed = (e) => {
     console.log(coinsnumberofcoin);
     dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
     alert(`congrats , you win more ${coinsnumberofcoin} coins`);
-    dispatch(ladder_record("win")); 
-  }
+    dispatch(ladder_record("win"));  
+   }
   else{
     totalcoins=totalcoins-coins; 
     setotalcoins(totalcoins);
@@ -154,6 +156,10 @@ const coinbuyed = (e) => {
     dispatch(ladder_record("loose")); 
 
   }
+}
+else{
+  alert("wait for next turn"); 
+}
 }
 else{
   alert("please login") ; 
