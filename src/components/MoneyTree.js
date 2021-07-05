@@ -126,8 +126,18 @@ var sizearr = ["large" , "small"] ;
     console.log(coins);
     console.log(numberclick);
     if(userid){
-    if (numberclick == rollSum ||numberclick == size || numberclick == type ) {  
-      var coinsnumberofcoin = coins * coinsmultiplied;
+      var coinsnumberofcoin
+    if (numberclick == rollSum ||numberclick == size || numberclick == type ) { 
+      if(numberclick == rollSum ){
+        coinsnumberofcoin = coins * coinsmultiplied;
+      }
+      if(numberclick == size){
+        coinsnumberofcoin = coins * 1.9;
+      }
+      if(numberclick == type){
+        coinsnumberofcoin = coins * 3.6;
+      }
+
       console.log(totalcoins); 
       totalcoins=coinsnumberofcoin+totalcoins
       console.log(totalcoins); 
