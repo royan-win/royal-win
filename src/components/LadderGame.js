@@ -34,7 +34,7 @@ var [value, setvalue] = useState([]);
   const [arrfirst, setArrFirst] = useState(''); 
   const [arrsecond, setArrSecond] = useState(''); 
   const [arrimg, setArrImg] = useState('');
-
+let [typeval, settypeval] = useState(''); 
  const [data , setdata] = useState({
    A:"" ,
    B:"" ,
@@ -99,6 +99,8 @@ dispatch(ladderhistory(historydata));
 
 },[numberofdraw])
 
+
+
 useEffect(()=>{
   setArrFirst(arrone[Math.floor(Math.random() * arrone.length)]);
   setArrSecond(arrtwo[Math.floor(Math.random() * arrtwo.length)]);
@@ -117,6 +119,8 @@ setcountclicked(1);
 
 const numberClicked = (e)=>{
     console.log(e.currentTarget.value);
+    console.log(e.currentTarget.name) ; 
+    settypeval(e.currentTarget.name)
    dispatch(laddergame(e.currentTarget.value)); 
    
 }
@@ -126,33 +130,45 @@ const coinbuyed = (e) => {
   e.preventDefault();
   console.log("hello");
   setcountclicked(0); 
+  var coinsnumberofcoin; 
+  var coinsnumberofcoin2 ; 
   console.log(countclicked);
   if(userid){
     if(countclicked){
   if (numberclick == `${arrfirst}`|| numberclick == `${arrsecond}` || numberclick == `${arrfirst}${arrsecond}`){
-    var coinsnumberofcoin ; 
+
     if(numberclick == `${arrfirst}`|| numberclick == `${arrsecond}`) {  
-       coinsnumberofcoin = coins * 1.9;
-       console.log(coinsnumberofcoin) 
-    } 
-    if(numberclick == `${arrfirst}${arrsecond}`){
-       coinsnumberofcoin = coins * 3.6;
-       console.log(coinsnumberofcoin); 
+      coinsnumberofcoin = coins * 1.9;
+      console.log(coinsnumberofcoin) 
     }
+    if(numberclick == `${arrfirst}${arrsecond}`){
+       coinsnumberofcoin2 = coins * 3.6;
+       console.log(coinsnumberofcoin2); 
+    }
+    if(coinsnumberofcoin==undefined){
+    totalcoins=coinsnumberofcoin2+totalcoins
+    }else{
     totalcoins=coinsnumberofcoin+totalcoins
+    }
     console.log(totalcoins); 
     setotalcoins(totalcoins); 
     dispatch(totalcoinsdata({totalcoins,userid})) ; 
     console.log(coinsnumberofcoin);
     dispatch(deposit({deposit:coinsnumberofcoin , id:userid , name:user?.result?.Real_name}))
-    alert(`congrats , you win more ${coinsnumberofcoin} coins`);
+    alert(`congrats , you win more ${coinsnumberofcoin==undefined? coinsnumberofcoin2: coinsnumberofcoin} coins`);
     dispatch(ladder_record("win"));  
    }
   else{
-    totalcoins=totalcoins-coins; 
+    if(typeval=='doubleval'){
+      coinsnumberofcoin = coins * 3.6;
+      totalcoins=totalcoins-(coins*3.6)
+      }else{
+      coinsnumberofcoin = coins * 1.9;
+      totalcoins=totalcoins-(coins*1.9)
+      }
     setotalcoins(totalcoins);
     dispatch(totalcoinsdata({totalcoins,userid})) ;
-    alert(`oops wrong answer`);
+    alert(`oops wrong answer you loose ${coinsnumberofcoin==undefined? coinsnumberofcoin2: coinsnumberofcoin}`);
     dispatch(ladder_record("loose")); 
 
   }
@@ -165,6 +181,7 @@ else{
   alert("please login") ; 
 }
 }
+
     return (
       <>
         <div style={{display:"flex" , flexDirection:"row"}}>
@@ -232,25 +249,25 @@ else{
           <div className="grid grid-flow-col mb-2">
               <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                  <button value="A" name="A"  onClick={numberClicked} className="text-yellow-600 text-md">A</button>
+                  <button value="A" name="singleval"  onClick={numberClicked} className="text-yellow-600 text-md">A</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">1.9</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                  <button value="A" name="B"  onClick={numberClicked} className="text-yellow-600 text-md">B</button>
+                  <button value="A" name="singleval"  onClick={numberClicked} className="text-yellow-600 text-md">B</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">1.9</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                  <button value="C" name="C"  onClick={numberClicked} className="text-yellow-600 text-md">C</button>
+                  <button value="C" name="singleval"  onClick={numberClicked} className="text-yellow-600 text-md">C</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">1.9</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 pl-3 pr-3 border w-8 items-center ml-6">
-                  <button value="D" name="D"  onClick={numberClicked} className="text-yellow-600 text-md">D</button>
+                  <button value="D" name="singleval"  onClick={numberClicked} className="text-yellow-600 text-md">D</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">1.9</p>
               </div>
@@ -262,25 +279,25 @@ else{
             <div className="grid grid-flow-col mb-2">
               <div className="inline-block ml-2 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 border w-8 items-center ml-6">
-                  <button value={"AC"} name="AC"  onClick={numberClicked} className="text-yellow-600 text-md">AC</button>
+                  <button value={"AC"} name="doubleval"  onClick={numberClicked} className="text-yellow-600 text-md">AC</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">3.6</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 border w-8 items-center ml-6">
-                  <button value="AD" name="AD"  onClick={numberClicked} className="text-yellow-600 text-md">AD</button>
+                  <button value="AD" name="doubleval"  onClick={numberClicked} className="text-yellow-600 text-md">AD</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">3.6</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 border w-8 items-center ml-6">
-                  <button value="BC" name="BC"  onClick={numberClicked} className="text-yellow-600 text-md">BC</button>
+                  <button value="BC" name="doubleval"  onClick={numberClicked} className="text-yellow-600 text-md">BC</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">3.6</p>
               </div>
               <div className="inline-block ml-1 mr-1 p-2 bg-gray-800 rounded-lg items-center">
                 <div className="rounded-full p-1 border w-8 items-center ml-6">
-                  <button value="BD" name="BD"  onClick={numberClicked} className="text-yellow-600 text-md">BD</button>
+                  <button value="BD" name="doubleval"  onClick={numberClicked} className="text-yellow-600 text-md">BD</button>
                 </div>
                 <p className="text-white ml-7 mt-1 text-sm">3.6</p>
               </div>
